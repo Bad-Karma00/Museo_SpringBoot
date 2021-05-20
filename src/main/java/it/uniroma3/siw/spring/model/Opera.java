@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-public class Opera {
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"titolo","autore_id"}))
+public class Opera implements Comparable<Opera> {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,7 +25,7 @@ public class Opera {
 	
 	
 	@Column (nullable = true)
-	private LocalDate anno;
+	private Integer anno;
 	
 	
 	@Column (nullable = true)
@@ -34,16 +37,73 @@ public class Opera {
 	@ManyToOne (cascade= {CascadeType.ALL})
 	private Artista autore;
 
-	public Opera(String titolo, LocalDate anno, String descrizione, Collezione collezione, Artista autore) {
-		this.titolo = titolo;
-		this.anno = anno;
-		this.descrizione = descrizione;
-		this.collezione = collezione;
-		this.autore = autore;
-	}
+    private String immagine;
 	
 	public Opera() {
 		
 	}
 
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public Integer getAnno() {
+		return anno;
+	}
+
+	public void setAnno(Integer anno) {
+		this.anno = anno;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Collezione getCollezione() {
+		return collezione;
+	}
+
+	public void setCollezione(Collezione collezione) {
+		this.collezione = collezione;
+	}
+
+	public Artista getAutore() {
+		return autore;
+	}
+
+	public void setAutore(Artista autore) {
+		this.autore = autore;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+	
+	public int compareTo(Opera opera){
+		int result;
+		result = this.getTitolo().compareTo(opera.getTitolo());
+		if (result == 0)
+			result = this.getAutore().compareTo(opera.getAutore());
+		return result;
+	}
 }

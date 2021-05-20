@@ -29,14 +29,49 @@ public class Museo {
 	@OneToMany (mappedBy = "museo", cascade= {CascadeType.ALL})
 	private List<Curatore> dipendenti;
 
-	public Museo(String nome, List<Collezione> collezioneMuseo, List<Curatore> dipendenti) {
-		this.nome = nome;
-		this.collezioneMuseo = collezioneMuseo;
-		this.dipendenti = dipendenti;
-	}
 	
 	public Museo() {
 		
+	}
+
+
+	public Long getId() {
+		return Id;
+	}
+
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public List<Collezione> getCollezioneMuseo() {
+		return collezioneMuseo;
+	}
+
+
+	public void setCollezioneMuseo(List<Collezione> collezioneMuseo) {
+		this.collezioneMuseo = collezioneMuseo;
+	}
+
+
+	public List<Curatore> getDipendenti() {
+		return dipendenti;
+	}
+
+
+	public void setDipendenti(List<Curatore> dipendenti) {
+		this.dipendenti = dipendenti;
 	}
 
 	
