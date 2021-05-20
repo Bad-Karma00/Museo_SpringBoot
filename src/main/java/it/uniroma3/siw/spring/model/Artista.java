@@ -24,7 +24,7 @@ public class Artista implements Comparable<Artista>{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	@Column (nullable = false)
 	@NotEmpty
@@ -62,12 +62,12 @@ public class Artista implements Comparable<Artista>{
 
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 
