@@ -1,7 +1,7 @@
 package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDate;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,10 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome", "cognome"}))
-public class Curatore {
+public class Curatore implements Comparable<Curatore> {
 	
 	@Column (nullable = false)
 	private String nome;
@@ -24,7 +25,8 @@ public class Curatore {
 	private String cognome;
 	
 	@Column (nullable = false)
-	private LocalDate data;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date data;
 	
 	@Column (nullable = true)
 	private String luogo;
@@ -44,21 +46,108 @@ public class Curatore {
 	@ManyToOne(cascade= {CascadeType.ALL})
 	private Museo museo;
 
-	public Curatore(String nome, String cognome, LocalDate data, String luogo, String mail, String numero,
-			Long matricola, List<Collezione> collezioni, Museo museo) {
-		this.nome = nome;
-		this.cognome = cognome;
-		this.data = data;
-		this.luogo = luogo;
-		this.mail = mail;
-		this.numero = numero;
-		this.matricola = matricola;
-		this.collezioni = collezioni;
-		this.museo = museo;
-	}
 	
 	public Curatore() {
 		
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getCognome() {
+		return cognome;
+	}
+
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public String getLuogo() {
+		return luogo;
+	}
+
+
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
+
+
+	public String getMail() {
+		return mail;
+	}
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
+	public String getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	public Long getMatricola() {
+		return matricola;
+	}
+
+
+	public void setMatricola(Long matricola) {
+		this.matricola = matricola;
+	}
+
+
+	public List<Collezione> getCollezioni() {
+		return collezioni;
+	}
+
+
+	public void setCollezioni(List<Collezione> collezioni) {
+		this.collezioni = collezioni;
+	}
+
+
+	public Museo getMuseo() {
+		return museo;
+	}
+
+
+	public void setMuseo(Museo museo) {
+		this.museo = museo;
+	}
+	
+	@Override
+	public int compareTo(Curatore curatore){
+		int result;
+		result = this.getNome().compareTo(curatore.getNome());
+		if (result == 0)
+			result = this.getCognome().compareTo(curatore.getCognome());
+		return result;
 	}
 
 }
