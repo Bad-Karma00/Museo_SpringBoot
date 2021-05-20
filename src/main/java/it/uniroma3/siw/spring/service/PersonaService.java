@@ -33,7 +33,7 @@ public class PersonaService {
 	}
 
 	@Transactional
-	public Persona personaPerId(Long id) {
+	public Persona personaPerId(Long id) {		
 		Optional<Persona> optional = Optional.of(personaRepository.findOne(id));
 		if (optional.isPresent())
 			return optional.get();
