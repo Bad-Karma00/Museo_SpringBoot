@@ -1,9 +1,7 @@
 package it.uniroma3.siw.spring.model;
 
-import java.time.LocalDate;
 
-
-
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,58 +13,163 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome","cognome"}))
-public class Artista {
+public class Artista implements Comparable<Artista>{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
 	@Column (nullable = false)
+	@NotEmpty
 	private String nome;
 	
 	@Column (nullable = false)
+	@NotEmpty
 	private String cognome;
 	
 	@Column (nullable = false)
-	private LocalDate dataNascita;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dataNascita;
 	
 	@Column (nullable = true)
 	private String luogoNascita;
 	
 	@Column (nullable = true)
-	private LocalDate dataMorte;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dataMorte;
 	
 	@Column (nullable = true)
 	private String luogoMorte;
 	
 	@Column (nullable = false)
+	@NotEmpty
 	private String nazionalita;
 	
 	@OneToMany (mappedBy = "autore", cascade= {CascadeType.ALL})
 	private List<Opera> opere;
 	
 	
-
-	public Artista(String nome, String cognome, LocalDate dataNascita, String luogoNascita, LocalDate dataMorte, String luogoMorte, String nazionalita, List<Opera> opere) {
-		this.nome = nome;
-		this.cognome = cognome;
-		this.dataNascita = dataNascita;
-		this.luogoNascita = luogoNascita;
-		this.dataMorte = dataMorte;
-		this.luogoMorte = luogoMorte;
-		this.nazionalita = nazionalita;
-		this.opere = opere;
-	}
-	
 	public Artista() {
 		
 	}
+
+
+	public Long getId() {
+		return Id;
+	}
+
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public String getCognome() {
+		return cognome;
+	}
+
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+
+	public String getLuogoNascita() {
+		return luogoNascita;
+	}
+
+
+	public void setLuogoNascita(String luogoNascita) {
+		this.luogoNascita = luogoNascita;
+	}
+
+
+	public Date getDataMorte() {
+		return dataMorte;
+	}
+
+
+	public void setDataMorte(Date dataMorte) {
+		this.dataMorte = dataMorte;
+	}
+
+
+	public String getLuogoMorte() {
+		return luogoMorte;
+	}
+
+
+	public void setLuogoMorte(String luogoMorte) {
+		this.luogoMorte = luogoMorte;
+	}
+
+
+	public String getNazionalita() {
+		return nazionalita;
+	}
+
+
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
+	}
+
+
+	public List<Opera> getOpere() {
+		return opere;
+	}
+
+
+	public void setOpere(List<Opera> opere) {
+		this.opere = opere;
+	}
 	
+	private String immagine;
+
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
 	
+	@Override
+	public int compareTo(Artista artista){
+		int result;
+		result = this.getNome().compareTo(artista.getNome());
+		if (result == 0)
+			result = this.getCognome().compareTo(artista.getCognome());
+		return result;
+	}
 	
 
 	
