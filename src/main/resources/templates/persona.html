@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.persona})"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+    <div>
+    	<h4 th:text="#{header.persona}">...</h4>
+    	
+    	<div th:if="${persona}" th:object="${persona}">
+			<span th:text="*{nome}">qui-va-nome</span>
+			<span th:text="*{cognome}">qui-va-cognome</span>
+   		</div>
+    	<div th:unless="${persona}">Non esiste</div>
+    </div>
+    <footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
