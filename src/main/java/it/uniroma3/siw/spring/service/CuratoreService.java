@@ -34,7 +34,7 @@ public class CuratoreService {
 
 	@Transactional
 	public Curatore curatorePerId(Long id) {
-		Optional<Curatore> optional = Optional.of(curatoreRepository.findOne(id));
+		Optional<Curatore> optional = curatoreRepository.findById(id);
 		if (optional.isPresent())
 			return optional.get();
 		else 
