@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Artista;
 import it.uniroma3.siw.spring.model.Opera;
-import it.uniroma3.siw.spring.model.Persona;
 import it.uniroma3.siw.spring.repository.OperaRepository;
 
 @Service
@@ -35,7 +34,7 @@ public class OperaService {
 
 	@Transactional
 	public Opera operaPerId(Long id) {
-		Optional<Opera> optional = Optional.of(operaRepository.findOne(id));
+		Optional<Opera> optional = operaRepository.findById(id);
 		if (optional.isPresent())
 			return optional.get();
 		else 

@@ -39,13 +39,13 @@ public class OperaController {
     	return "persona.html";
     }
 
-    @RequestMapping(value = "/persona", method = RequestMethod.GET)
+    @RequestMapping(value = "/opera", method = RequestMethod.GET)
     public String getOpere(Model model) {
     		model.addAttribute("opere", this.operaService.tutte());
     		return "persone.html";
     }
     
-    @RequestMapping(value = "/persona", method = RequestMethod.POST)
+    @RequestMapping(value = "/opera", method = RequestMethod.POST)
     public String newOpera(@ModelAttribute("opera") Opera opera, 
     									Model model, BindingResult bindingResult) {
     	this.operaValidator.validate(opera, bindingResult);
