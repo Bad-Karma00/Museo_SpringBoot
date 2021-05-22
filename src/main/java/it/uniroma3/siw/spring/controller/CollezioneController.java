@@ -31,19 +31,19 @@ public class CollezioneController {
     public String addCollezione(Model model) {
     	logger.debug("addCollezione");
     	model.addAttribute("collezione", new Collezione());
-        return "InserisciCollezione.html";
+        return "collezioneForm.html";
     }
 
     @RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
     public String getCollezione(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("collezione", this.collezioneService.collezionePerId(id));
-    	return "Sito_Museo_Collezione.html";
+    	return "collezione.html";
     }
 
     @RequestMapping(value = "/collezione", method = RequestMethod.GET)
     public String getCollezione(Model model) {
-    		model.addAttribute("collezioni", this.collezioneService.tutti());
-    		return "collezioni.html";
+    		model.addAttribute("collezione", this.collezioneService.tutti());
+    		return "collezione.html";
     }
     
     @RequestMapping(value = "/collezione", method = RequestMethod.POST)
@@ -52,8 +52,8 @@ public class CollezioneController {
     	this.collezioneValidator.validate(collezione, bindingResult);
         if (!bindingResult.hasErrors()) {
         	this.collezioneService.inserisci(collezione);
-            model.addAttribute("collezioni", this.collezioneService.tutti());
-            return "collezioni.html";
+            model.addAttribute("collezione", this.collezioneService.tutti());
+            return "collezione.html";
         }
         return "collezioneForm.html";
     }
