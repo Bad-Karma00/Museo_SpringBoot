@@ -162,27 +162,21 @@ ul a.active{
 .Img4:hover .overlay{
   opacity:1;
 }
-
-.span{
- font-size:40px;
-}
 </style>
 </head>
 <body>
-  <div class="bannerIMG">
-    <div class="bannerTXT">
-    <h1>MUSEO SUS</h1>
-      <p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
-    </div>
-  </div>
-  
-  
-  
-
-<ul>
-  <li><a class="active" href=>Home</a></li>
-  <li><a href="">Informazioni</a></li>
-  <li class="dropdown">
+	<div class="bannerIMG">
+   	 <div class="bannerTXT">
+    	<h1>MUSEO SUS</h1>
+     	<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
+    	
+      </div>
+  	</div>
+  	
+  	<ul>
+  	<li><a class="active" href=>Home</a></li>
+  	<li><a href="">Informazioni</a></li>
+  	<li class="dropdown">
      <a href="" class="dropbtn">Collezione</a>
     <div class="dropdown-content">
       <a href="">Link 1</a>
@@ -190,49 +184,27 @@ ul a.active{
       <a href="">Link 3</a>
     </div>
     </li>
-  <li class="dropdown1">
+  	<li class="dropdown1">
     <a href="" class="dropbtn1">Autori</a>
     <div class="dropdown-content1">
       <a href="">Link 1</a>
       <a href="">Link 2</a>
       <a href="">Link 3</a>
     </div>
-  </li>
-  </ul>
-  
-  <div class="parallax">	
+  	</li>
+ 	</ul>
+  	
+  	
+  	<div class="parallax">	
 	<div>
-		<h4>Inserisci i dati di una persona</h4>
+    	<h4>Lista delle opere</h4>
+		<ul>
+			<li th:each="collezione : ${collezioni}">
+				<a 
+				   th:text="|${collezione.nome} ${collezione.descrizione} ${collezione.curatore}|">Paolo Rossi</a>
+			</li>
+		</ul>
 	</div>
-	<form th:action="@{/opera}" method="POST" th:object="${opera}">
-		<div th:if="${#fields.hasGlobalErrors()}">
-  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-		</div>		
-		<div>
-			<div>
-				<span>Titolo:</span>
-				<span><input type="text" th:field="*{titolo}" /></span>
-				<span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
-			</div>		
-			<div>
-				<span>Anno:</span>
-				<span><input type="text" th:field="*{anno}" /></span>
-				<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
-			</div>
-			<div>
-				<span>Descrizione:</span>
-				<span><input type="text" th:field="*{descrizione}" /></span>
-				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
-			</div>
-			<div>
-				<span><button type="submit">Invio</button></span>
-			</div>
-		</div>
-	</form>
-	</div>
-   <div class="parallax"></div>
+	<div class="parallax">	
 </body>
 </html>
-
-
-

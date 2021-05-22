@@ -162,10 +162,6 @@ ul a.active{
 .Img4:hover .overlay{
   opacity:1;
 }
-
-.span{
- font-size:40px;
-}
 </style>
 </head>
 <body>
@@ -202,23 +198,18 @@ ul a.active{
   
   <div class="parallax">	
 	<div>
-		<h4>Inserisci i dati di una persona</h4>
+		<h4>Inserisci i dati di una collezione</h4>
 	</div>
-	<form th:action="@{/opera}" method="POST" th:object="${opera}">
+	<form th:action="@{/collezione}" method="POST" th:object="${collezione}">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
 		<div>
 			<div>
-				<span>Titolo:</span>
-				<span><input type="text" th:field="*{titolo}" /></span>
-				<span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
+				<span>Nome:</span>
+				<span><input type="text" th:field="*{nome}" /></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>		
-			<div>
-				<span>Anno:</span>
-				<span><input type="text" th:field="*{anno}" /></span>
-				<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
-			</div>
 			<div>
 				<span>Descrizione:</span>
 				<span><input type="text" th:field="*{descrizione}" /></span>
@@ -229,10 +220,6 @@ ul a.active{
 			</div>
 		</div>
 	</form>
-	</div>
    <div class="parallax"></div>
 </body>
 </html>
-
-
-
