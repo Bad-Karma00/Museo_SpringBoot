@@ -1,17 +1,38 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.persona})"> </head>
+<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.home})"> </head>
 <body>
-	<header th:replace="fragments/base.html :: intestazione"></header>
-    <div>
-    	<h4 th:text="#{header.index}">Menu</h4>
-		<div>
-			<a href="addPersona">Inserisci dati persona</a>
-   		</div>
-		<div>
-			<a href="persona">Elenco persone</a>
-   		</div>
-    </div>
-    <footer th:replace="fragments/base.html :: fondo"></footer>
+  
+  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <div class="parallax">
+    <div class="row">
+      <div class="column">
+        <div class="Img1">
+          <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg/800px-David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg">
+            <div class="overlay">Cavallo funny</div>
+        </div>
+        
+        <div class="Img2"> 
+          <img src ="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c12c5e21-79bd-4999-82a7-8f5adcfba4fc/de8spm6-e92d8abc-df41-416f-9c58-91b06e6f29e1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYzEyYzVlMjEtNzliZC00OTk5LTgyYTctOGY1YWRjZmJhNGZjXC9kZThzcG02LWU5MmQ4YWJjLWRmNDEtNDE2Zi05YzU4LTkxYjA2ZTZmMjllMS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.UOo_yxa_oTn8pOB5kQBYQHduU1XuUXCQ9wbgDhEjf9g">
+          <div class="overlay">Furry furrosa</div> 
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="Img3">
+          <img src ="https://www.jing.fm/clipimg/full/177-1776299_download-little-pony-rainbow-dash-png.png">
+            <div class="overlay">Cavallo piccolo</div>
+        </div>
+        
+        <div class="Img4"> 
+          <img src ="https://i.imgur.com/baqLiFI.png">
+          <div class="overlay">Dio</div> 
+        </div>
+      </div>
+ </div>
+  
+   <div class="parallax"></div>
 </body>
 </html>
+
+
+
