@@ -42,8 +42,8 @@ public class ArtistaController {
 
     @RequestMapping(value = "/artista", method = RequestMethod.GET)
     public String getArtista(Model model) {
-    		model.addAttribute("artista", this.artistaService.tutti());
-    		return "artista.html";
+    		model.addAttribute("artisti", this.artistaService.tutti());
+    		return "artisti";
     }
     
     @RequestMapping(value = "/artista", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class ArtistaController {
         if (!bindingResult.hasErrors()) {
         	this.artistaService.inserisci(artista);
             model.addAttribute("artista", this.artistaService.tutti());
-            return "artista.html";
+            return "artisti.html";
         }
         return "artistaForm.html";
     }

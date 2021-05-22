@@ -43,7 +43,7 @@ public class CollezioneController {
     @RequestMapping(value = "/collezione", method = RequestMethod.GET)
     public String getCollezione(Model model) {
     		model.addAttribute("collezione", this.collezioneService.tutti());
-    		return "collezione.html";
+    		return "collezioni.html";
     }
     
     @RequestMapping(value = "/collezione", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class CollezioneController {
         if (!bindingResult.hasErrors()) {
         	this.collezioneService.inserisci(collezione);
             model.addAttribute("collezione", this.collezioneService.tutti());
-            return "collezione.html";
+            return "collezioni.html";
         }
         return "collezioneForm.html";
     }
