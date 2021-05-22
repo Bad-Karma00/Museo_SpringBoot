@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles(title)">
+	<meta charset="UTF-8" />
+	<link th:href="@{/css/cssHome.css}" rel="stylesheet">
+	<title th:text="${title}"></title>
+</head>
+<body>
+	<header th:fragment="intestazione">
+		<div class="bannerIMG">
+    		<div class="bannerTXT">
+    			<h1>MUSEO SUS</h1>
+     			<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
+    		</div>
+  		</div>
+  
+  
+  
+
+<ul>
+  <li><a class="active" href=>Home</a></li>
+  <li><a href="">Informazioni</a></li>
+  <li class="dropdown">
+     <a href="" class="dropbtn">Collezione</a>
+    <div class="dropdown-content">
+      <a href="">Link 1</a>
+      <a href="">Link 2</a>
+      <a href="">Link 3</a>
+    </div>
+    </li>
+  <li class="dropdown1">
+    <a href="" class="dropbtn1">Autori</a>
+    <div class="dropdown-content1">
+      <a href="">Link 1</a>
+      <a href="">Link 2</a>
+      <a href="">Link 3</a>
+    </div>
+  </li>
+  <li class="dropdown1">
+    <a href="" class="dropbtn1">Operazioni</a>
+    <div class="dropdown-content1">
+      <a href="/addOpera">Aggiungi Opera</a>
+      <a href="">Aggiungi Collezione</a>
+      <a href="/opera">Lista Opere</a>
+    </div>
+  </li>
+  </ul>
+	</header>
+	
+</body>
+</html>

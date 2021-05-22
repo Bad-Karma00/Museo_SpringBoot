@@ -30,19 +30,19 @@ public class OperaController {
     public String addOpera(Model model) {
     	logger.debug("addOpera");
     	model.addAttribute("opera", new Opera());
-        return "personaForm.html";
+        return "InserisciOpera.html";
     }
 
     @RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
     public String getOpera(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("opera", this.operaService.operaPerId(id));
-    	return "persona.html";
+    	return "opera.html";
     }
 
     @RequestMapping(value = "/opera", method = RequestMethod.GET)
     public String getOpere(Model model) {
     		model.addAttribute("opere", this.operaService.tutte());
-    		return "persone.html";
+    		return "opere.html";
     }
     
     @RequestMapping(value = "/opera", method = RequestMethod.POST)
@@ -51,9 +51,9 @@ public class OperaController {
     	this.operaValidator.validate(opera, bindingResult);
         if (!bindingResult.hasErrors()) {
         	this.operaService.inserisci(opera);
-            model.addAttribute("persone", this.operaService.tutte());
-            return "persone.html";
+            model.addAttribute("opere", this.operaService.tutte());
+            return "opere.html";
         }
-        return "personaForm.html";
+        return "InserisciOpera.html";
     }
 }
