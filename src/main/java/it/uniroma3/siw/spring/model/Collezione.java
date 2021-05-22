@@ -19,8 +19,8 @@ import javax.validation.constraints.NotEmpty;
 
 
 @Entity
-@Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome", "curatore_id"}))
-public class Collezione {
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome", "curatore_matricola"}))
+public class Collezione implements Comparable<Collezione>{
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)

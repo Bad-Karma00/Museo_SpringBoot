@@ -6,8 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.siw.spring.model.Artista;
 import it.uniroma3.siw.spring.model.Opera;
-import it.uniroma3.siw.spring.model.Persona;
-
 
 
 public interface OperaRepository extends CrudRepository<Opera, Long> {
