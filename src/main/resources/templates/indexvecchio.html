@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/base.html :: headerfiles(title=#{pageTitle.persona})"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+    <div>
+    	<h4 th:text="#{header.index}">Menu</h4>
+		<div>
+			<a href="addPersona">Inserisci dati persona</a>
+   		</div>
+		<div>
+			<a href="persona">Elenco persone</a>
+   		</div>
+    </div>
+    <footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
