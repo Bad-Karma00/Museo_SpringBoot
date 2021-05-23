@@ -1,0 +1,61 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseArtista.html :: headerfiles(title=#{pageTitle.artista})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseArtista.html :: intestazione"></header>
+  
+  <div class="parallax">
+  <div class="InformazioniR">
+    <div class="InformazioniC1">
+	  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Michelangelo_Caravaggio_061.jpg">
+  </div>
+  
+  <div class="InformazioniC2">
+	<div class="InfoContainer" th:if="${artista}" th:object="${artista}">
+		<div>Nome: <class="Testo" th:text="*{nome}"></div>
+		<br>
+		<div>Cognome: <class="Testo" th:text="*{cognome}"></div>
+		<br>
+		<div>Data di nascita: <class="Testo" th:text="*{dataNascita}"></div>
+		<br>
+		<div>Luogo di nascita: <class="Testo" th:text="*{luogoNascita}"></div>
+		<br>
+		<div>Data di morte: <class="Testo" th:text="*{dataMorte}"></div>
+		<br>
+		<div>Luogo di morte: <class="Testo" th:text="*{luogoMorte}"></div>
+		<br>
+		<div>Nazionalità: <class="Testo" th:text="*{nazionalita}"></div>
+		<br>
+	 </div>
+	 <div th:unless="${artista}">Non esiste</div>
+  </div>
+</div>
+	
+	<div class="Biografia">
+		<h2>Biografia</h2>
+    
+		<div class="BioInfo">Ciao sono un personaggio del rinomato gioco di amongus us but I look kinda SUS *tu tu tu turutu*</div>
+	</div>
+	
+	<div class="ImgR">
+		<div class="ImgC">
+			<div class="Img1"><img src ="https://i.kym-cdn.com/photos/images/facebook/001/966/774/1bd.png">
+			<div class="overlay">Titolo 1</div> 
+			</div>
+		</div>
+		<div class="ImgC">
+			<div class="Img2"><img src ="https://i.kym-cdn.com/photos/images/original/001/966/775/de4.png">
+			<div class="overlay">Titolo 2</div>
+			</div>
+		</div>
+		<div class="ImgC">
+			<div class="Img3"><img src ="https://i.pinimg.com/originals/3b/cc/09/3bcc0967d2269faabcb50c3ae26d030b.png">
+			<div class="overlay">Titolo 3</div> 
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

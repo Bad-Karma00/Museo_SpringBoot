@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<header th:fragment="intestazione">
 <div class="bannerIMG">
     <div class="bannerTXT">
     <h1>RED SUS</h1>  
@@ -26,11 +27,23 @@
     </div>
     </li>
   <li class="dropdown1">
-    <a href="" class="active" class="dropbtn1">Autori</a>
+    <a href="" class="dropbtn1">Autori</a>
     <div class="dropdown-content1">
       <a href="">Link 1</a>
       <a href="">Link 2</a>
       <a href="">Link 3</a>
     </div>
   </li>
+  <li class="dropdown1">
+    <a href="" class="dropbtn1">Operazioni</a>
+    <div class="dropdown-content1">
+      <a href="/addOpera">Aggiungi Opera</a>
+      <a href="/addArtista">Aggiungi Artista</a>
+      <a href="/artista">Lista Artisti</a>
+      <a href="/opera">Lista Opere</a>
+    </div>
+  </li>
   </ul>
+  </header>
+  </body>
+  </html>
