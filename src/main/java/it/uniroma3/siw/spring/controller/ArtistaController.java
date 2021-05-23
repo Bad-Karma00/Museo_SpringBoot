@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 import org.slf4j.Logger;
 
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class ArtistaController {
     public String addArtista(Model model) {
     	logger.debug("addArtista");
     	model.addAttribute("artista", new Artista());
-        return "artistaForm.html";
+        return "InserisciArtista.html";
     }
 
     @RequestMapping(value = "/artista/{id}", method = RequestMethod.GET)
@@ -43,7 +44,7 @@ public class ArtistaController {
     @RequestMapping(value = "/artista", method = RequestMethod.GET)
     public String getArtista(Model model) {
     		model.addAttribute("artisti", this.artistaService.tutti());
-    		return "artisti";
+    		return "artisti.html";
     }
     
     @RequestMapping(value = "/artista", method = RequestMethod.POST)
@@ -52,9 +53,10 @@ public class ArtistaController {
     	this.artistaValidator.validate(artista, bindingResult);
         if (!bindingResult.hasErrors()) {
         	this.artistaService.inserisci(artista);
-            model.addAttribute("artista", this.artistaService.tutti());
+            model.addAttribute("artisti", this.artistaService.tutti());
             return "artisti.html";
         }
-        return "artistaForm.html";
+        return "InserisciArtista.html";
     }
+ 
 }

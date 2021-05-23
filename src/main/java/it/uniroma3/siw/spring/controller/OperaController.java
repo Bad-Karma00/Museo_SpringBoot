@@ -1,5 +1,9 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.spring.model.Artista;
 import it.uniroma3.siw.spring.model.Opera;
+import it.uniroma3.siw.spring.service.ArtistaService;
 import it.uniroma3.siw.spring.service.OperaService;
 
 @Controller
@@ -23,6 +30,9 @@ public class OperaController {
     @Autowired
     private OperaValidator operaValidator;
     
+    @Autowired
+    private ArtistaService artistaService;
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
 
@@ -30,6 +40,7 @@ public class OperaController {
     public String addOpera(Model model) {
     	logger.debug("addOpera");
     	model.addAttribute("opera", new Opera());
+    	model.addAttribute("artisti", this.artistaService.tutti());
         return "InserisciOpera.html";
     }
 
@@ -47,9 +58,15 @@ public class OperaController {
     
     @RequestMapping(value = "/opera", method = RequestMethod.POST)
     public String newOpera(@ModelAttribute("opera") Opera opera, 
-    									Model model, BindingResult bindingResult) {
+    									Model model, BindingResult bindingResult,
+    									@RequestParam(value = "autoreSelezionato") Long autoreID) {
+    	
     	this.operaValidator.validate(opera, bindingResult);
         if (!bindingResult.hasErrors()) {
+        	List<Artista> artisti = (List<Artista>) artistaService.tutti();
+        	Collections.sort(artisti);
+        	Artista artista = artistaService.artistaPerId(autoreID);
+        	opera.setAutore(artista);
         	this.operaService.inserisci(opera);
             model.addAttribute("opere", this.operaService.tutte());
             return "opere.html";
