@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.controller;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,30 +33,30 @@ public class CuratoreController {
     public String addCuratore(Model model) {
     	logger.debug("addCuratore");
     	model.addAttribute("curatore", new Curatore());
-        return "personaForm.html";
+        return "InserisciCuratore.html";
     }
 
     @RequestMapping(value = "/curatore/{id}", method = RequestMethod.GET)
     public String getCuratore(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("curatore", this.curatoreService.curatorePerId(id));
-    	return "persona.html";
+    	return "curatore.html";
     }
 
     @RequestMapping(value = "/curatore", method = RequestMethod.GET)
     public String getCuratori(Model model) {
     		model.addAttribute("curatori", this.curatoreService.tutti());
-    		return "persone.html";
+    		return "curatori.html";
     }
     
     @RequestMapping(value = "/curatore", method = RequestMethod.POST)
     public String newCuratore(@ModelAttribute("curatore") Curatore curatore, 
-    									Model model, BindingResult bindingResult) {
+    									Model model, BindingResult bindingResult){
     	this.curatoreValidator.validate(curatore, bindingResult);
         if (!bindingResult.hasErrors()) {
         	this.curatoreService.inserisci(curatore);
             model.addAttribute("curatori", this.curatoreService.tutti());
-            return "persone.html";
+            return "index.html";
         }
-        return "personaForm.html";
+        return "InserisciCuratore.html";
     }
 }

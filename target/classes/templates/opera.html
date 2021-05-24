@@ -11,10 +11,15 @@
 				<div class ="card">
 					<img src="https://i.kym-cdn.com/photos/images/original/001/868/461/108.jpg" class="center">
 						<div th:if="${opera}" th:object="${opera}" class="container">
-							<span th:text="*{titolo}">qui-va-titolo</span>
-							<span th:text="*{anno}">qui-va-anno</span>
-							<span th:text="*{descrizione}">qui-va-descrizione</span>
-							<span th:text="*{autore.nome}">qui-va-autore</span>
+							Titolo:<span th:text="*{titolo}">qui-va-titolo</span>
+							<br>
+							Anno:<span th:text="*{anno}">qui-va-anno</span>
+							<br>
+							Descrizione:<span th:text="*{descrizione}">qui-va-descrizione</span>
+							<br>
+							Autore:<span th:text="*{autore.nome}">qui-va-autore</span>
+							<br>
+							Collezione:<span th:text="*{collezione.nome}">qui-va-collezione</span>
 						</div>
 						<div th:unless="${opera}">Non esiste</div>
 					</div>
