@@ -1,6 +1,6 @@
 package it.uniroma3.siw.spring.controller;
 
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.model.Artista;
+import it.uniroma3.siw.spring.model.Collezione;
 import it.uniroma3.siw.spring.model.Opera;
 import it.uniroma3.siw.spring.service.ArtistaService;
+import it.uniroma3.siw.spring.service.CollezioneService;
 import it.uniroma3.siw.spring.service.OperaService;
 
 @Controller
@@ -33,6 +35,9 @@ public class OperaController {
     @Autowired
     private ArtistaService artistaService;
     
+    @Autowired
+    private CollezioneService collezioneService;
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
 
@@ -41,6 +46,7 @@ public class OperaController {
     	logger.debug("addOpera");
     	model.addAttribute("opera", new Opera());
     	model.addAttribute("artisti", this.artistaService.tutti());
+    	model.addAttribute("collezioni", this.collezioneService.tutti());
         return "InserisciOpera.html";
     }
 
@@ -59,14 +65,24 @@ public class OperaController {
     @RequestMapping(value = "/opera", method = RequestMethod.POST)
     public String newOpera(@ModelAttribute("opera") Opera opera, 
     									Model model, BindingResult bindingResult,
-    									@RequestParam(value = "autoreSelezionato") Long autoreID) {
+    									@RequestParam(value = "autoreSelezionato") Long autoreID,
+    									@RequestParam(value = "collezioneSelezionata") Long collezioneID) {
     	
     	this.operaValidator.validate(opera, bindingResult);
         if (!bindingResult.hasErrors()) {
+        	//Recupero collezione
+        	List<Collezione> collezioni = (List<Collezione>) collezioneService.tutti();
+        	Collections.sort(collezioni);
+        	Collezione collezione = collezioneService.collezionePerId(collezioneID);
+        	
+        	//Recupero artista
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artista = artistaService.artistaPerId(autoreID);
+        	
+        	//Aggiunta opera
         	opera.setAutore(artista);
+        	opera.setCollezione(collezione);
         	this.operaService.inserisci(opera);
             model.addAttribute("opere", this.operaService.tutte());
             return "opere.html";

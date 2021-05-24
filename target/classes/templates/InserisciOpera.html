@@ -37,7 +37,17 @@
     					th:text="${artista.nome}">
     			</option>
 				</select>
-			</div>			
+			</div>
+			<div>
+				<span>Collezione:</span>
+				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona una collezione</option>
+    			<option th:each="collezione : ${collezioni}"
+    					th:value="${collezione.id}" 
+    					th:text="${collezione.nome}">
+    			</option>
+				</select>
+			</div>				
 		</form>
 			<div>
 				<span><button type="submit">Invio</button></span>
