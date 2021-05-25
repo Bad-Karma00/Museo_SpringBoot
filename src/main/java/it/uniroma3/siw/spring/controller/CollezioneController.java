@@ -104,8 +104,8 @@ public class CollezioneController {
 
     @RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
     public String getCollezione(@PathVariable("id") Long id, Model model) {
-    	List<Opera> opere = (List<Opera>) operaService.tutte();
     	Collezione collezione= this.collezioneService.collezionePerId(id);
+    	List<Opera> opere = collezione.getOpereDellaCollezione();
     	Curatore curatore= this.curatoreService.curatorePerId(collezione.getCuratore().getMatricola());
     	model.addAttribute("collezione", collezione);
     	model.addAttribute("curatore", curatore);
