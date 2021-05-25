@@ -1,0 +1,33 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <div class="parallax">	
+	<div>
+		<h4>Seleziona l'opera da rimuovere</h4>
+	</div>
+	<form th:action="@{/rimozioneOpera}" method="POST" th:object="${opera}">
+		<div>
+			<span>Opera:</span>
+			<select  name="operaSelezionata" id="autoUpdate" class="autoUpdate">
+    		<option value="0">Seleziona un'opera</option>
+    		<option th:each="opera : ${opere}"
+    				th:value="${opera.id}" 
+    				th:text="${opera.titolo}">
+    		</option>
+			</select>
+			<span><button type="submit">Invio</button></span>
+		 </div>				
+		</form>
+			<div>
+				
+			</div>
+		</div>
+   <div class="parallax"></div>
+</body>
+</html>
+
+
+

@@ -43,17 +43,36 @@ public class OperaController {
 
     @RequestMapping(value="/addOpera", method = RequestMethod.GET)
     public String addOpera(Model model) {
-    	logger.debug("addOpera");
-    	model.addAttribute("opera", new Opera());
-    	model.addAttribute("artisti", this.artistaService.tutti());
-    	model.addAttribute("collezioni", this.collezioneService.tutti());
-        return "InserisciOpera.html";
+    		logger.debug("addOpera");
+    		model.addAttribute("opera", new Opera());
+    		model.addAttribute("artisti", this.artistaService.tutti());
+    		model.addAttribute("collezioni", this.collezioneService.tutti());
+    		return "InserisciOpera.html";
     }
-
+    
+    
+    @RequestMapping(value="/rimOpera", method = RequestMethod.GET)
+    public String rimOpera(Model model) {
+    		logger.debug("rimOpera");
+    		model.addAttribute("opere", this.operaService.tutte());
+        	return "RimuoviOpera.html";
+    }
+    
+    @RequestMapping(value = "/rimozioneOpera", method = RequestMethod.POST)
+    public String rimozioneOpera(@ModelAttribute("opera") Opera opera,
+    							 Model model, BindingResult bindingResult,
+								 @RequestParam(value = "operaSelezionata") Long operaID) {
+    		List<Opera> opere = (List<Opera>) operaService.tutte();
+    		Collections.sort(opere);
+    		Opera operaDaRim = operaService.operaPerId(operaID);
+    		this.operaService.delete(operaDaRim);
+    		return "opere.html";
+    }
+    
     @RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
     public String getOpera(@PathVariable("id") Long id, Model model) {
-    	model.addAttribute("opera", this.operaService.operaPerId(id));
-    	return "opera.html";
+    		model.addAttribute("opera", this.operaService.operaPerId(id));
+    		return "opera.html";
     }
 
     @RequestMapping(value = "/opera", method = RequestMethod.GET)
