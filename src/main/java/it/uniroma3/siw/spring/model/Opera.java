@@ -29,10 +29,10 @@ public class Opera implements Comparable<Opera> {
 	@Column (nullable = true)
 	private String descrizione;
 	
-	@ManyToOne (cascade= {CascadeType.ALL})
+	@ManyToOne (cascade= {CascadeType.REFRESH})
 	private Collezione collezione;
 	
-	@ManyToOne (cascade= {CascadeType.ALL})
+	@ManyToOne (cascade= {CascadeType.REMOVE})
 	private Artista autore;
 
     private String immagine;

@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -39,11 +38,8 @@ public class Curatore implements Comparable<Curatore> {
 	@Id
 	private Long matricola;
 	
-	@OneToMany (mappedBy = "curatore", cascade= {CascadeType.ALL})
+	@OneToMany (mappedBy = "curatore", cascade= {CascadeType.PERSIST})
 	private List<Collezione> collezioni;
-	
-	@ManyToOne(cascade= {CascadeType.ALL})
-	private Museo museo;
 
 	
 	public Curatore() {
@@ -130,15 +126,6 @@ public class Curatore implements Comparable<Curatore> {
 		this.collezioni = collezioni;
 	}
 
-
-	public Museo getMuseo() {
-		return museo;
-	}
-
-
-	public void setMuseo(Museo museo) {
-		this.museo = museo;
-	}
 	
 	@Override
 	public int compareTo(Curatore curatore){

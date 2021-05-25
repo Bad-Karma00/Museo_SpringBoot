@@ -52,7 +52,7 @@ public class Artista implements Comparable<Artista>{
 	@NotEmpty
 	private String nazionalita;
 	
-	@OneToMany (mappedBy = "autore", cascade= {CascadeType.ALL})
+	@OneToMany (mappedBy = "autore", cascade= {CascadeType.PERSIST})
 	private List<Opera> opere;
 	
 	

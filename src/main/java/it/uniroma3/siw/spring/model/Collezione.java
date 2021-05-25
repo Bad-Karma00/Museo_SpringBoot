@@ -34,13 +34,10 @@ public class Collezione implements Comparable<Collezione>{
 	@NotEmpty
 	private String descrizione;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
+	@ManyToOne(cascade= {CascadeType.REFRESH})
 	private Curatore curatore;
 	
-	@ManyToOne(cascade= {CascadeType.ALL})
-	private Museo museo;
-	
-	@OneToMany (mappedBy = "collezione", cascade= {CascadeType.ALL})
+	@OneToMany (mappedBy = "collezione", cascade= {CascadeType.PERSIST})
 	private List<Opera> opereDellaCollezione;
 
 	public Collezione() {
@@ -79,13 +76,6 @@ public class Collezione implements Comparable<Collezione>{
 		this.curatore = curatore;
 	}
 
-	public Museo getMuseo() {
-		return museo;
-	}
-
-	public void setMuseo(Museo museo) {
-		this.museo = museo;
-	}
 
 	public List<Opera> getOpereDellaCollezione() {
 		return opereDellaCollezione;
