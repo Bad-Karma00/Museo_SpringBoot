@@ -1,0 +1,51 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <div class="parallax">
+  
+  <div>
+  		<h4>Dati collezione attuale</h4>
+  		
+  		<th:text="|${collezione.nome} ${collezione.descrizione} ${collezione?.curatore?.cognome}|">
+  </div>
+  
+  
+  
+  <div>	
+		<h4>Inserisci i dati di una collezione</h4>
+	</div>
+	<form th:action="@{/ModificaCollezione}" method="POST" th:object="${collezione}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+  			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+		</div>		
+			<div>
+			<div>
+				<span>Nome:</span>
+				<span><input type="text" th:field="*{nome}" /></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>		
+			<div>
+				<span>Descrizione:</span>
+				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
+			</div>
+			<div>bobbe
+				<span>Curatore:</span>
+				<select  name="curatoreNuovo" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona un curatore</option>
+    			<option th:each="curatore : ${curatori}"
+    					th:value="${curatore.matricola}" 
+    					th:text="${curatore.cognome}">
+    			</option>
+				</select>
+				</div>
+				<span><button type="submit">Invio</button></span>
+			</div>			
+		</form>
+			</div>
+   <div class="parallax"></div>
+</body>
+</html>
