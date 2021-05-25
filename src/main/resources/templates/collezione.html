@@ -1,42 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.collezione})"> </head>
+<head  th:replace="fragments/baseCollection.html :: headerfiles(title=#{pageTitle.collezione})"> </head>
 <body>
-  
-    <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <div class="bannerIMG">
+    <div class="bannerTXT">
+    <h1  th:text="|${collezione.nome}|">Robe</h1> 
+	<p th:text="|${curatore.nome} ${curatore.cognome} |"></p>
+    </div>
+  </div>
+    <header th:replace="fragments/baseCollection.html :: intestazione"></header>
   <div class="parallax">
   
   <div class="ImgR">
-		<div class="ImgC">
-			<div class="Img1"><img src ="https://i.kym-cdn.com/photos/images/facebook/001/966/774/1bd.png">
-			<div class="overlay">
-			<br>
-			<div th:if="${curatore}" th:object="${curatore}" class="container">
-							<span th:text="*{nome}">qui-va-titolo</span>
-							<span th:text="*{cognome}">qui-va-anno</span>
-						</div>
-						<div th:unless="${curatore}">Non esiste</div>
-			</div> 
+		<div class="ImgC"><h4>Lista delle opere</h4>
+		<ul>
+			<li th:each="opera : ${opere}">
+				<div class="Img1"> <img src ="https://i.kym-cdn.com/photos/images/facebook/001/966/774/1bd.png"> 
+				<a href="opera.html" 
+				   th:href="@{'/opera' + '/' + ${opera.id}}" 
+				   th:text="|${opera.titolo} ${opera.anno} ${opera.descrizione}|">Paolo Rossi</a>
 			</div>
-		</div>
-		<div class="ImgC">
-			<div class="Img2"><img src ="https://i.kym-cdn.com/photos/images/original/001/966/775/de4.png">
-			<div class="overlay">
-			Titolo 2<br>
-			Autore:
-			</div>
-			</div>
-		</div>
-		<div class="ImgC">
-			<div class="Img3"><img src ="https://i.pinimg.com/originals/3b/cc/09/3bcc0967d2269faabcb50c3ae26d030b.png">
-			<div class="overlay">
-			Titolo 3<br>
-			Autore:
-			</div> 
-			</div>
-		</div>
-	</div>
-  
-  
+			</li>
+		</ul>
+</div>
   </div>
+  </div>
+	<div class="parallax">	</div>
 </body>
 </html>

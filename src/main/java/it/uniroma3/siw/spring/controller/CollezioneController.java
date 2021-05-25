@@ -21,12 +21,16 @@ import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.model.Opera;
 import it.uniroma3.siw.spring.service.CollezioneService;
 import it.uniroma3.siw.spring.service.CuratoreService;
+import it.uniroma3.siw.spring.service.OperaService;
 
 @Controller
 public class CollezioneController {
 	
 	@Autowired
 	private CollezioneService collezioneService;
+	
+	@Autowired
+	private OperaService operaService;
 	
     @Autowired
     private CollezioneValidator collezioneValidator;
@@ -65,7 +69,12 @@ public class CollezioneController {
 
     @RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
     public String getCollezione(@PathVariable("id") Long id, Model model) {
-    	model.addAttribute("collezione", this.collezioneService.collezionePerId(id));
+    	List<Opera> opere = (List<Opera>) operaService.tutte();
+    	Collezione collezione= this.collezioneService.collezionePerId(id);
+    	Curatore curatore= this.curatoreService.curatorePerId(collezione.getCuratore().getMatricola());
+    	model.addAttribute("collezione", collezione);
+    	model.addAttribute("curatore", curatore);
+    	model.addAttribute("opere", opere);
     	return "collezione.html";
     }
 
@@ -80,7 +89,7 @@ public class CollezioneController {
     									Model model, BindingResult bindingResult,
     									@RequestParam(value = "curatoreSelezionato") Long matricola) {
     	this.collezioneValidator.validate(collezione, bindingResult);
-        if (!bindingResult.hasErrors()) {
+       if (!bindingResult.hasErrors()) {
         	List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
         	Collections.sort(curatori);
         	Curatore curatore = curatoreService.curatorePerId(matricola);
