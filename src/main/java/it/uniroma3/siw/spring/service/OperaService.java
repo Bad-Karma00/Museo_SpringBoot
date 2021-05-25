@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -48,5 +49,10 @@ public class OperaService {
 			return true;
 		else 
 			return false;
+	}
+	
+	@Transactional
+	public void delete(Opera opera){
+		this.operaRepository.delete(opera);
 	}
 }
