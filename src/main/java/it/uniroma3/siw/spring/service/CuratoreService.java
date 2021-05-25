@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -48,6 +49,11 @@ public class CuratoreService {
 			return true;
 		else 
 			return false;
+	}
+	
+	@Transactional
+	public void delete(Curatore curatore){
+		this.curatoreRepository.delete(curatore);
 	}
 	
 }

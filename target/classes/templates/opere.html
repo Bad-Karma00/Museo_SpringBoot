@@ -11,7 +11,7 @@
 			<li th:each="opera : ${opere}">
 				<a href="opera.html" 
 				   th:href="@{'/opera' + '/' + ${opera.id}}" 
-				   th:text="|${opera.titolo} ${opera.anno} ${opera.descrizione} ${opera.autore.nome} ${opera.collezione.nome}|">Paolo Rossi</a>
+				   th:text="|${opera.titolo} ${opera.anno} ${opera.descrizione} ${opera?.autore?.nome} ${opera?.collezione?.nome}|">Paolo Rossi</a>
 			</li>
 		</ul>
 	</div>

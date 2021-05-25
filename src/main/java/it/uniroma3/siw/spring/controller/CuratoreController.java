@@ -1,6 +1,9 @@
 package it.uniroma3.siw.spring.controller;
 
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.service.CuratoreService;
@@ -34,6 +38,24 @@ public class CuratoreController {
     	logger.debug("addCuratore");
     	model.addAttribute("curatore", new Curatore());
         return "InserisciCuratore.html";
+    }
+    
+    @RequestMapping(value="/rimCuratore", method = RequestMethod.GET)
+    public String rimCuratore(Model model) {
+    		logger.debug("rimCuratore");
+    		model.addAttribute("curatori", this.curatoreService.tutti());
+        	return "RimuoviCuratore.html";
+    }
+    
+    @RequestMapping(value = "/rimozioneCuratore", method = RequestMethod.POST)
+    public String rimozioneCuratore(@ModelAttribute("curatore") Curatore curatore,
+    							 Model model, BindingResult bindingResult,
+								 @RequestParam(value = "curatoreSelezionato") Long curatoreID) {
+    		List<Curatore> opere = (List<Curatore>) curatoreService.tutti();
+    		Collections.sort(opere);
+    		Curatore curatoreDaRim = curatoreService.curatorePerId(curatoreID);
+    		this.curatoreService.delete(curatoreDaRim);
+    		return "index.html";
     }
 
     @RequestMapping(value = "/curatore/{id}", method = RequestMethod.GET)
