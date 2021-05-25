@@ -17,9 +17,9 @@
 							<br>
 							Descrizione:<span th:text="*{descrizione}">qui-va-descrizione</span>
 							<br>
-							Autore:<span th:text="*{autore.nome}">qui-va-autore</span>
+							Autore:<span th:text="*{autore?.nome}">qui-va-autore</span>
 							<br>
-							Collezione:<span th:text="*{collezione.nome}">qui-va-collezione</span>
+							Collezione:<span th:text="*{collezione?.nome}">qui-va-collezione</span>
 						</div>
 						<div th:unless="${opera}">Non esiste</div>
 					</div>
