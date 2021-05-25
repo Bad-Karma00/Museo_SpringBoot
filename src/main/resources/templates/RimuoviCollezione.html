@@ -1,0 +1,33 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseCollection.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseCollection.html :: intestazione"></header>
+  <div class="parallax">	
+	<div>
+		<h4>Seleziona l'opera da rimuovere</h4>
+	</div>
+	<form th:action="@{/rimozioneCollezione}" method="POST" th:object="${collezione}">
+		<div>
+			<span>Collezione:</span>
+			<select name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
+    		<option value="0">Seleziona una collezione</option>
+    		<option th:each="collezione : ${collezione}"
+    				th:value="${collezione.id}" 
+    				th:text="${collezione.nome}">
+    		</option>
+			</select>
+			<span><button type="submit">Invio</button></span>
+		 </div>				
+		</form>
+			<div>
+				
+			</div>
+		</div>
+   <div class="parallax"></div>
+</body>
+</html>
+
+
+

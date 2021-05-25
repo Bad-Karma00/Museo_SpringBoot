@@ -1,9 +1,9 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<head  th:replace="fragments/baseCollection.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <header th:replace="fragments/baseCollection.html :: intestazione"></header>
   <div class="parallax">	
 		<h4>Inserisci i dati di una collezione</h4>
 	</div>
@@ -24,18 +24,16 @@
 			</div>
 			<div>
 				<span>Curatore:</span>
-				<select  name="curatoreSelezionato" >
+				<select  name="curatoreSelezionato" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona un curatore</option>
     			<option th:each="curatore : ${curatori}"
     					th:value="${curatore.matricola}" 
     					th:text="${curatore.cognome}">
     			</option>
 				</select>
+				<span><button type="submit">Invio</button></span>
 			</div>			
 		</form>
-			<div>
-				<span><button type="submit">Invio</button></span>
-			</div>
 			</div>
    <div class="parallax"></div>
 </body>
