@@ -1,0 +1,33 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.curatoreRimuovi})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <div class="parallax">	
+	<div>
+		<h4>Seleziona il curatore da rimuovere</h4>
+	</div>
+	<form th:action="@{/rimozioneCuratore}" method="POST" th:object="${curatore}">
+		<div>
+			<span>Curatore:</span>
+			<select  name="curatoreSelezionato" id="autoUpdate" class="autoUpdate">
+    		<option value="0">Seleziona un curatore</option>
+    		<option th:each="curatore : ${curatori}"
+    				th:value="${curatore.matricola}" 
+    				th:text="${curatore.nome}">
+    		</option>
+			</select>
+			<span><button type="submit">Invio</button></span>
+		 </div>				
+		</form>
+			<div>
+				
+			</div>
+		</div>
+   <div class="parallax"></div>
+</body>
+</html>
+
+
+
