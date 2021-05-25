@@ -3,6 +3,7 @@ package it.uniroma3.siw.spring.service;
 import java.util.List;
 
 
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -51,5 +52,10 @@ public class CollezioneService {
 			return true;
 		else 
 			return false;
+	}
+	
+	@Transactional
+	public void delete(Collezione collezione){
+		this.collezioneRepository.delete(collezione);
 	}
 }
