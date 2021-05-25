@@ -7,45 +7,24 @@
 </head>
 <body>
 	<header th:fragment="intestazione">
-		<div class="bannerIMG">
-    		<div class="bannerTXT">
-    			<h1>MUSEO SUS</h1>
-     			<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
-    		</div>
-  		</div>
-  
-  
-  
-
 <ul>
-  <li><a href=>Home</a></li>
+  <li><a class="active" href="/">Home</a></li>
   <li><a href="">Informazioni</a></li>
   <li class="dropdown">
-     <a href="" class="dropbtn">Collezione</a>
-    <div class="dropdown-content">
-      <a href="">Link 1</a>
-      <a href="">Link 2</a>
-      <a href="">Link 3</a>
-    </div>
+     <a href="/collezione">Collezioni</a>
     </li>
   <li class="dropdown1">
-    <a href="" class="dropbtn1">Autori</a>
-    <div class="dropdown-content1">
-      <a href="">Link 1</a>
-      <a href="">Link 2</a>
-      <a href="">Link 3</a>
-    </div>
+    <a href="/artista">Autori</a>
   </li>
   <li class="dropdown1">
     <a href="" class="dropbtn1">Operazioni</a>
-    <div class="dropdown-content1">
+    <div class="dropdown-content1">    
       <a href="/addCuratore">Aggiungi Curatore</a>
       <a href="/addOpera">Aggiungi Opera</a>
       <a href="/addArtista">Aggiungi Artista</a>
       <a href="/addCollezione">Aggiungi Collezione</a>
       <a href="/artista">Lista Artisti</a>
       <a href="/opera">Lista Opere</a>
-      <a href="/collezione">Lista Collezioni</a>
 	  <a href="/rimOpera">Rimuovi Opera</a>
 	  <a href="/rimCollezione">Rimuovi Collezione</a>
 	  <a href="/rimCuratore">Rimuovi Curatore</a>

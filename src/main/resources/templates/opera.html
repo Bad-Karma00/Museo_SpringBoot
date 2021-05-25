@@ -2,7 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.opera})"> </head>
 <body>
-  
+  	<div class="bannerIMG">
+    		<div class="bannerTXT">
+    			<h1 th:text="|${opera.titolo}|"></h1>
+    		</div>
+  		</div>
   <header th:replace="fragments/baseOpera.html :: intestazione"></header>
   
   <div class="parallax">
