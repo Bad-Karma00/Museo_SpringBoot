@@ -66,6 +66,41 @@ public class CollezioneController {
     		this.collezioneService.delete(collezioneDaRim);
     		return "collezioni.html";
     }
+    
+    @RequestMapping(value="/selezionaCollezione", method = RequestMethod.GET)
+    public String selezionaCollezione(Model model) {
+    	logger.debug("selezionaCollezione");
+    	model.addAttribute("collezioni", this.collezioneService.tutti());
+        return "SelezionaCollezione.html";
+    }
+    
+    @RequestMapping(value="/editCollezione", method = RequestMethod.POST)
+    public String editCollezione(Model model, @RequestParam(value = "collezioneSelezionata") Long collezioneID) {
+    	logger.debug("editCollezione");
+    	model.addAttribute("collezione", this.collezioneService.collezionePerId(collezioneID));
+    	model.addAttribute("curatori", this.curatoreService.tutti());
+        return "ModificaCollezione.html";
+    }
+    
+    @RequestMapping(value = "/modificaCollezione", method = RequestMethod.POST)
+    public String modificaCollezione(@ModelAttribute("collezione") Collezione collezione, 
+    									Model model, BindingResult bindingResult,
+    									@RequestParam(value = "nome") String nomeNuovo,
+    									@RequestParam(value = "descrizione") String descNuovo,
+    									@RequestParam(value = "curatoreNuovo") Long curNuovo) {
+    	this.collezioneValidator.validate(collezione, bindingResult);
+       if (!bindingResult.hasErrors()) {
+    	    List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
+       		Collections.sort(curatori);
+       		Curatore curatoreNuovo = this.curatoreService.curatorePerId(curNuovo);
+       		collezione.setNome(nomeNuovo);
+       		collezione.setDescrizione(descNuovo);
+       		collezione.setCuratore(curatoreNuovo);
+            model.addAttribute("collezioni", this.collezioneService.tutti());
+            return "collezioni.html";
+        }
+       return "ModificaCollezione.html";
+    }
 
     @RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
     public String getCollezione(@PathVariable("id") Long id, Model model) {
