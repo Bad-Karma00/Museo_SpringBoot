@@ -1,10 +1,11 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseCollection.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseCollection.html :: intestazione"></header>
-  <div class="parallax">	
+  <header th:replace="fragments/baseOpera.html :: intestazione"></header>
+  <div class="parallax">
+  <div>	
 		<h4>Inserisci i dati di una collezione</h4>
 	</div>
 	<form th:action="@{/collezione}" method="POST" th:object="${collezione}">
@@ -31,6 +32,7 @@
     					th:text="${curatore.cognome}">
     			</option>
 				</select>
+				</div>
 				<span><button type="submit">Invio</button></span>
 			</div>			
 		</form>
