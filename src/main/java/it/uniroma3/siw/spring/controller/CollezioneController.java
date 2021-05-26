@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
 import java.util.Collections;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,16 +22,12 @@ import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.model.Opera;
 import it.uniroma3.siw.spring.service.CollezioneService;
 import it.uniroma3.siw.spring.service.CuratoreService;
-import it.uniroma3.siw.spring.service.OperaService;
 
 @Controller
 public class CollezioneController {
 	
 	@Autowired
 	private CollezioneService collezioneService;
-	
-	@Autowired
-	private OperaService operaService;
 	
     @Autowired
     private CollezioneValidator collezioneValidator;
@@ -48,6 +45,24 @@ public class CollezioneController {
         return "InserisciCollezione.html";
     }
     
+
+    @RequestMapping(value = "/collezione", method = RequestMethod.POST)
+    public String newCollezione(@ModelAttribute("collezione") Collezione collezione, 
+    									Model model, BindingResult bindingResult,
+    									@RequestParam(value = "curatoreSelezionato") Long matricola) {
+    	this.collezioneValidator.validate(collezione, bindingResult);
+       if (!bindingResult.hasErrors()) {
+        	List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
+        	Collections.sort(curatori);
+        	Curatore curatore = curatoreService.curatorePerId(matricola);
+        	collezione.setCuratore(curatore);
+        	this.collezioneService.inserisci(collezione);
+            model.addAttribute("collezioni", this.collezioneService.tutti());
+            return "collezioni.html";
+        }
+       return "InserisciCollezione.html";
+    }
+    
     
     @RequestMapping(value="/rimCollezione", method = RequestMethod.GET)
     public String rimCollezione(Model model) {
@@ -57,8 +72,7 @@ public class CollezioneController {
     }
     
     @RequestMapping(value = "/rimozioneCollezione", method = RequestMethod.POST)
-    public String rimozioneCollezione(@ModelAttribute("collezione") Opera opera,
-    							 Model model, BindingResult bindingResult,
+    public String rimozioneCollezione(Model model, BindingResult bindingResult,
 								 @RequestParam(value = "collezioneSelezionata") Long collezioneID) {
     		List<Collezione> collezioni = (List<Collezione>) collezioneService.tutti();
     		Collections.sort(collezioni);
@@ -67,39 +81,40 @@ public class CollezioneController {
     		return "collezioni.html";
     }
     
-    @RequestMapping(value="/selezionaCollezione", method = RequestMethod.GET)
+    @RequestMapping(value="/editCollezione", method = RequestMethod.GET)
     public String selezionaCollezione(Model model) {
-    	logger.debug("selezionaCollezione");
-    	model.addAttribute("collezioni", this.collezioneService.tutti());
-        return "SelezionaCollezione.html";
-    }
-    
-    @RequestMapping(value="/editCollezione", method = RequestMethod.POST)
-    public String editCollezione(Model model, @RequestParam(value = "collezioneSelezionata") Long collezioneID) {
     	logger.debug("editCollezione");
-    	model.addAttribute("collezione", this.collezioneService.collezionePerId(collezioneID));
+    	model.addAttribute("collezioni", this.collezioneService.tutti());
     	model.addAttribute("curatori", this.curatoreService.tutti());
-        return "ModificaCollezione.html";
+        return "editCollezione.html";
     }
     
     @RequestMapping(value = "/modificaCollezione", method = RequestMethod.POST)
-    public String modificaCollezione(@ModelAttribute("collezione") Collezione collezione, 
-    									Model model, BindingResult bindingResult,
-    									@RequestParam(value = "nome") String nomeNuovo,
-    									@RequestParam(value = "descrizione") String descNuovo,
-    									@RequestParam(value = "curatoreNuovo") Long curNuovo) {
-    	this.collezioneValidator.validate(collezione, bindingResult);
-       if (!bindingResult.hasErrors()) {
-    	    List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
-       		Collections.sort(curatori);
-       		Curatore curatoreNuovo = this.curatoreService.curatorePerId(curNuovo);
-       		collezione.setNome(nomeNuovo);
-       		collezione.setDescrizione(descNuovo);
-       		collezione.setCuratore(curatoreNuovo);
+    public String modificaCollezione(Model model, BindingResult bindingResult,
+    									@ModelAttribute("collezione") Collezione collezione,
+    									@ModelAttribute("nomeNuovo") String nome,
+    									@ModelAttribute("descrizioneNuova") String descrizione,
+    									@ModelAttribute("curatoreSelezionato") Curatore curatore,
+    									@RequestParam(value = "collezioneSelezionata") Long collezioneID,
+    									@RequestParam(value = "nomeNuovo") String nomeNuovo,
+    									@RequestParam(value = "descrizioneNuova") String descNuovo,
+    									@RequestParam(value = "curatoreSelezionato") Long curNuovo){
+        	List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
+        	Collections.sort(curatori);
+        	Curatore curatoreNuovo = curatoreService.curatorePerId(curNuovo);
+        	
+        	Collezione collezioneVecchia = collezioneService.collezionePerId(collezioneID);
+        	collezioneService.delete(collezioneVecchia);
+        	
+        	Collezione collezioneNuova = new Collezione();
+        	collezioneNuova.setId(collezioneID);
+        	collezioneNuova.setNome(nomeNuovo);
+        	collezioneNuova.setDescrizione(descNuovo);
+        	collezioneNuova.setCuratore(curatoreNuovo);
+        	
+        	collezioneService.inserisci(collezioneNuova);
             model.addAttribute("collezioni", this.collezioneService.tutti());
             return "collezioni.html";
-        }
-       return "ModificaCollezione.html";
     }
 
     @RequestMapping(value = "/collezione/{id}", method = RequestMethod.GET)
@@ -119,20 +134,4 @@ public class CollezioneController {
     		return "collezioni.html";
     }
     
-    @RequestMapping(value = "/collezione", method = RequestMethod.POST)
-    public String newCollezione(@ModelAttribute("collezione") Collezione collezione, 
-    									Model model, BindingResult bindingResult,
-    									@RequestParam(value = "curatoreSelezionato") Long matricola) {
-    	this.collezioneValidator.validate(collezione, bindingResult);
-       if (!bindingResult.hasErrors()) {
-        	List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
-        	Collections.sort(curatori);
-        	Curatore curatore = curatoreService.curatorePerId(matricola);
-        	collezione.setCuratore(curatore);
-        	this.collezioneService.inserisci(collezione);
-            model.addAttribute("collezioni", this.collezioneService.tutti());
-            return "collezioni.html";
-        }
-       return "InserisciCollezione.html";
-    }
 }
