@@ -1,6 +1,6 @@
-<meta name="robots" content="noindex">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.opera})"> </head>
+<head  th:replace="fragments/baseOpera.html :: headerfiles(title=#{pageTitle.opera})" > </head>
 <body>
   	<div class="bannerIMG">
     		<div class="bannerTXT">
@@ -10,10 +10,10 @@
   <header th:replace="fragments/baseOpera.html :: intestazione"></header>
   
   <div class="parallax">
-    	<div class="row">
+    	<div class="row" >
 			<div class ="column">
 				<div class ="card">
-					<img src="https://i.kym-cdn.com/photos/images/original/001/868/461/108.jpg" class="center">
+				<img th:src="@{${opera.photosImagePath}}" class="center">
 						<div th:if="${opera}" th:object="${opera}" class="container">
 							Titolo:<span th:text="*{titolo}">qui-va-titolo</span>
 							<br>
