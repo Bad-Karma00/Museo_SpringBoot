@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -34,7 +35,8 @@ public class Opera implements Comparable<Opera> {
 	
 	@ManyToOne (cascade= {CascadeType.REMOVE})
 	private Artista autore;
-
+	
+	@Column(nullable = true, length = 64)
     private String immagine;
 	
 	public Opera() {
@@ -96,6 +98,13 @@ public class Opera implements Comparable<Opera> {
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
+	
+	 @Transient
+	    public String getPhotosImagePath() {
+	        if (immagine == null || id == null) return null;
+	         
+	        return "/opere-photos/" + id + "/" + immagine;
+	    }
 	
 	public int compareTo(Opera opera){
 		int result;

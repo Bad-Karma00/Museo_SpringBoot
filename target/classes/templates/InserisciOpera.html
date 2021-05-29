@@ -1,4 +1,4 @@
-<meta name="robots" content="noindex">
+<meta name="robots" http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html xmlns:th="http://www.thymeleaf.org">
 <head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
 <body>
@@ -8,7 +8,7 @@
 	<div>
 		<h4>Inserisci i dati di un'opera</h4>
 	</div>
-	<form th:action="@{/opera}" method="POST" th:object="${opera}">
+	<form th:action="@{/opera}" method="POST" th:object="${opera}" enctype ="multipart/form-data">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
@@ -28,13 +28,17 @@
 				<span><input type="text" th:field="*{descrizione}" /></span>
 				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 			</div>
+				<div>
+				<span>Immagine:</span>
+				<span><input type="file" name="img" accept="image/png, image/jpeg" /></span>
+			</div>
 			<div>
 				<span>Autore:</span>
 				<select  name="autoreSelezionato" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona un autore</option>
     			<option th:each="artista : ${artisti}"
     					th:value="${artista.id}" 
-    					th:text="${artista.nome}">
+    					th:text="|${artista.nome} ${artista.cognome}|">
     			</option>
 				</select>
 			</div>
