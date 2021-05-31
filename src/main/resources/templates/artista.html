@@ -12,7 +12,7 @@
   <div class="parallax">
   <div class="InformazioniR">
     <div class="InformazioniC1">
-	  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Michelangelo_Caravaggio_061.jpg">
+	  <img th:src="@{${artista.photosImagePath}}">
   </div>
   
   <div class="InformazioniC2">
@@ -39,7 +39,7 @@
 	<div class="Biografia">
 		<h2>Biografia</h2>
     
-		<div class="BioInfo">Ciao sono un personaggio del rinomato gioco di amongus us but I look kinda SUS *tu tu tu turutu*</div>
+		<div class="BioInfo" th:text="${artista.biografia}"></div>
 	</div>
 	
 	<div class="ImgR">
