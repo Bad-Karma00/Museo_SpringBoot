@@ -1,6 +1,8 @@
-package it.uniroma3.siw.spring.controller;
+package it.uniroma3.siw.spring.validator;
+
 
 import org.slf4j.Logger;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,15 +10,17 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.spring.model.Curatore;
-import it.uniroma3.siw.spring.service.CuratoreService;
+import it.uniroma3.siw.spring.model.Artista;
+import it.uniroma3.siw.spring.service.ArtistaService;
+
+
 
 @Component
-public class CuratoreValidator implements Validator {
+public class ArtistaValidator implements Validator {
 	@Autowired
-	private CuratoreService curatoreService;
+	private ArtistaService artistaService;
 	
-    private static final Logger logger = LoggerFactory.getLogger(CuratoreValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArtistaValidator.class);
 
 	@Override
 	public void validate(Object o, Errors errors) {
@@ -25,7 +29,7 @@ public class CuratoreValidator implements Validator {
 
 		if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
-			if (this.curatoreService.alreadyExists((Curatore)o)) {
+			if (this.artistaService.alreadyExists((Artista)o)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
@@ -34,6 +38,6 @@ public class CuratoreValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Curatore.class.equals(aClass);
+		return Artista.class.equals(aClass);
 	}
 }

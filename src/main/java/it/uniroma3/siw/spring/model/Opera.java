@@ -33,7 +33,7 @@ public class Opera implements Comparable<Opera> {
 	@ManyToOne (cascade= {CascadeType.REFRESH})
 	private Collezione collezione;
 	
-	@ManyToOne (cascade= {CascadeType.REMOVE})
+	@ManyToOne (cascade= {CascadeType.PERSIST})
 	private Artista autore;
 	
 	@Column(nullable = true, length = 64)

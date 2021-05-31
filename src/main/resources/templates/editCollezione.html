@@ -1,0 +1,45 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <div class="parallax">
+  <div>	
+		<h4>Seleziona la collezione che vuoi modificare e i nuovi dati</h4>
+	</div>
+	<form th:action="@{/modificaCollezione}" method="POST" th:object="${collezione}">
+			<div>
+				<span>Collezione da modificare:</span>
+				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona la collezione</option>
+    			<option th:each="collezione : ${collezioni}"
+    					th:value="${collezione.id}" 
+    					th:text="${collezione.nome}">
+    			</option>
+				</select>
+			</div>
+			<div>
+				<span>Nome nuovo:</span>
+				<span><input type="text" th:field="*{nome}"/></span>
+			</div>		
+			<div>
+				<span>Descrizione nuova:</span>
+				<span><input type="text" th:field="*{descrizione}"/></span>
+			</div>
+			<div>
+				<span>Curatore nuovo:</span>
+				<select  name="curatoreSelezionato" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona un curatore</option>
+    			<option th:each="curatore : ${curatori}"
+    					th:value="${curatore.matricola}" 
+    					th:text="${curatore.cognome}">
+    			</option>
+				</select>
+				</div>
+				<span><button type="submit">Invio</button></span>
+			</div>			
+		</form>
+   <div class="parallax"></div>
+</body>
+</html>

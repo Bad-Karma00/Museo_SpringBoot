@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
+
 import java.util.List;
 import javax.validation.Valid;
 
@@ -30,6 +31,7 @@ import it.uniroma3.siw.spring.model.Opera;
 import it.uniroma3.siw.spring.service.ArtistaService;
 import it.uniroma3.siw.spring.service.CollezioneService;
 import it.uniroma3.siw.spring.service.OperaService;
+import it.uniroma3.siw.spring.validator.OperaValidator;
 
 @Controller
 public class OperaController {
@@ -75,6 +77,47 @@ public class OperaController {
     		Opera operaDaRim = operaService.operaPerId(operaID);
     		this.operaService.delete(operaDaRim);
     		return "opere.html";
+    }
+    
+    @RequestMapping(value="/editOpera", method = RequestMethod.GET)
+    public String selezionaCollezione(Model model) {
+    	logger.debug("editOpera");
+    	model.addAttribute("opera", new Opera());
+    	model.addAttribute("opere", this.operaService.tutte());
+    	model.addAttribute("collezioni", this.collezioneService.tutti());
+    	model.addAttribute("artisti", this.artistaService.tutti());
+        return "editOpera.html";
+    }
+    
+    @RequestMapping(value = "/modificaOpera", method = RequestMethod.POST)
+    public String modificaCollezione(@ModelAttribute("operaSelezionata") Long operaID,
+    								 @ModelAttribute("titolo") String titoloNuovo,
+    								 @ModelAttribute("anno") Integer annoNuovo,
+    								 @ModelAttribute("descrizione") String descNuovo,
+    								 @ModelAttribute("artistaSelezionato") Long artistaID,
+    								 @ModelAttribute("collezioneSelezionata") Long collezioneID,
+    								 Model model, BindingResult bindingResult){
+    	
+    		
+        	List<Artista> artisti = (List<Artista>) artistaService.tutti();
+        	Collections.sort(artisti);
+        	Artista artistaNuovo = artistaService.artistaPerId(artistaID);
+        	
+        	List<Collezione> collezioni = (List<Collezione>) collezioneService.tutti();
+        	Collections.sort(collezioni);
+        	Collezione collezioneNuova = collezioneService.collezionePerId(collezioneID);
+        	
+        	Opera operaNuova = new Opera();
+        	operaNuova.setId(operaID);
+        	operaNuova.setTitolo(titoloNuovo);
+        	operaNuova.setAnno(annoNuovo);
+        	operaNuova.setDescrizione(descNuovo);
+        	operaNuova.setAutore(artistaNuovo);
+        	operaNuova.setCollezione(collezioneNuova);
+        	
+        	operaService.inserisci(operaNuova);
+            model.addAttribute("opere", this.operaService.tutte());
+            return "opere.html";
     }
     
     @RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
