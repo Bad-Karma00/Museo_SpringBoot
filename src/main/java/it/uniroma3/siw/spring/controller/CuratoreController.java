@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 
 import java.util.Collections;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.service.CuratoreService;
+import it.uniroma3.siw.spring.validator.CuratoreValidator;
 
 
 

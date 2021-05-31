@@ -16,8 +16,8 @@
 			<li th:each="opera : ${opere}">
 				<div class="Img1"> <img src ="https://i.kym-cdn.com/photos/images/facebook/001/966/774/1bd.png"> 
 				<a href="opera.html" 
-				   th:href="@{'/opera' + '/' + ${opera.id}}" 
-				   th:text="|${opera.titolo} ${opera.anno} ${opera.descrizione}|">Paolo Rossi</a>
+				   th:href="@{'/opera' + '/' + ${opera?.id}}" 
+				   th:text="|${opera?.titolo} ${opera?.anno} ${opera?.descrizione}|">Paolo Rossi</a>
 			</div>
 			</li>
 		</ul>

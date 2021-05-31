@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Collezione;
 import it.uniroma3.siw.spring.model.Curatore;
+import it.uniroma3.siw.spring.model.Opera;
 import it.uniroma3.siw.spring.repository.CollezioneRepository;
 
 @Service
@@ -21,6 +22,9 @@ public class CollezioneService {
 	
 	@Autowired
 	private CollezioneRepository collezioneRepository; 
+	
+	@Autowired
+	private OperaService operaService;
 	
 	@Transactional
 	public Collezione inserisci(Collezione collezione) {
@@ -57,6 +61,13 @@ public class CollezioneService {
 	
 	@Transactional
 	public void delete(Collezione collezione){
+		List<Opera> opere = operaService.tutte();
+		for(Opera opera : opere) {
+			if(opera.getCollezione().getId() == collezione.getId()) {
+				opera.setCollezione(null);
+			}
+		}
+
 		this.collezioneRepository.delete(collezione);
 	}
 }

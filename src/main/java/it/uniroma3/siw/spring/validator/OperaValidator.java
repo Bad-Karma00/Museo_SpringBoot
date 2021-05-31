@@ -1,4 +1,5 @@
-package it.uniroma3.siw.spring.controller;
+package it.uniroma3.siw.spring.validator;
+
 
 
 import org.slf4j.Logger;
@@ -9,26 +10,24 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.spring.model.Collezione;
-import it.uniroma3.siw.spring.service.CollezioneService;
-
-
+import it.uniroma3.siw.spring.model.Opera;
+import it.uniroma3.siw.spring.service.OperaService;
 
 @Component
-public class CollezioneValidator implements Validator {
+public class OperaValidator implements Validator {
 	@Autowired
-	private CollezioneService collezioneService;
+	private OperaService operaService;
 	
-    private static final Logger logger = LoggerFactory.getLogger(CollezioneValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(OperaValidator.class);
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titolo", "required");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "autore", "required");
 
 		if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
-			if (this.collezioneService.alreadyExists((Collezione)o)) {
+			if (this.operaService.alreadyExists((Opera)o)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
@@ -37,6 +36,6 @@ public class CollezioneValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Collezione.class.equals(aClass);
+		return Opera.class.equals(aClass);
 	}
 }

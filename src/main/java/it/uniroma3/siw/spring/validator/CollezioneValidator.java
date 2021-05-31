@@ -1,4 +1,4 @@
-package it.uniroma3.siw.spring.controller;
+package it.uniroma3.siw.spring.validator;
 
 
 import org.slf4j.Logger;
@@ -9,25 +9,26 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import it.uniroma3.siw.spring.model.Persona;
-import it.uniroma3.siw.spring.service.PersonaService;
+import it.uniroma3.siw.spring.model.Collezione;
+import it.uniroma3.siw.spring.service.CollezioneService;
+
 
 
 @Component
-public class PersonaValidator implements Validator {
+public class CollezioneValidator implements Validator {
 	@Autowired
-	private PersonaService personaService;
+	private CollezioneService collezioneService;
 	
-    private static final Logger logger = LoggerFactory.getLogger(PersonaValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(CollezioneValidator.class);
 
 	@Override
 	public void validate(Object o, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
 
 		if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
-			if (this.personaService.alreadyExists((Persona)o)) {
+			if (this.collezioneService.alreadyExists((Collezione)o)) {
 				logger.debug("e' un duplicato");
 				errors.reject("duplicato");
 			}
@@ -36,6 +37,6 @@ public class PersonaValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Persona.class.equals(aClass);
+		return Collezione.class.equals(aClass);
 	}
 }

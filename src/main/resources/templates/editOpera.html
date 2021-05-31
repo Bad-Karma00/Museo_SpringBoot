@@ -1,0 +1,60 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
+<body>
+  
+  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <div class="parallax">
+  <div>	
+		<h4>Seleziona l'opera che vuoi modificare e i nuovi dati</h4>
+	</div>
+	<form th:action="@{/modificaOpera}" method="POST" th:object="${opera}">
+			<div>
+				<span>Opera da modificare:</span>
+				<select  name="operaSelezionata" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona l'opera</option>
+    			<option th:each="opera : ${opere}"
+    					th:value="${opera.id}" 
+    					th:text="${opera.titolo}">
+    			</option>
+				</select>
+			</div>
+			<div>
+				<span>Titolo nuovo:</span>
+				<span><input type="text" th:field="*{titolo}"/></span>
+			</div>
+			<div>
+				<span>Anno nuovo:</span>
+				<span><input type="number" th:field="*{anno}"/></span>
+			</div>		
+			<div>
+				<span>Descrizione nuova:</span>
+				<span><input type="text" th:field="*{descrizione}"/></span>
+			</div>
+			<div>
+				<span>Autore nuovo:</span>
+				<select  name="artistaSelezionato" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona un artista</option>
+    			<option th:each="artista : ${artisti}"
+    					th:value="${artista.id}" 
+    					th:text="${artista.cognome}">
+    			</option>
+				</select>
+				</div>
+				
+				<div>
+				<span>Collezione nuova:</span>
+				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
+    			<option value="0">Seleziona una collezione</option>
+    			<option th:each="collezione : ${collezioni}"
+    					th:value="${collezione.id}" 
+    					th:text="${collezione.nome}">
+    			</option>
+				</select>
+				</div>
+				<span><button type="submit">Invio</button></span>
+			</div>			
+		</form>
+   <div class="parallax"></div>
+</body>
+</html>
