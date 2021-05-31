@@ -78,9 +78,15 @@ public class OperaController {
     }
     
     @RequestMapping(value = "/opera/{id}", method = RequestMethod.GET)
-    public String getOpera(@ModelAttribute("id") Long id, Model model) {
+    public String getOpera(@ModelAttribute("id") Long id, Model model) throws IOException  {
+    	//Resource res= resourceLoader.getResource("./src/main/resources/static/images/"+ this.operaService.operaPerId(id).getId()+"/"+ this.operaService.operaPerId(id).getImmagine());
+    	//System.out.println(res);
+          //File file = res.getFile();
+    	//System.out.println(file);
+    	//File file= uploader.getPercorsoFile(this.operaService.operaPerId(id).getImmagine());
     	Opera opera=this.operaService.operaPerId(id);
     	model.addAttribute("opera", opera);
+    	//model.addAttribute("img",file);
     	return "opera.html";
     }
 
@@ -116,7 +122,7 @@ public class OperaController {
         	opera.setCollezione(collezione);
         	this.operaService.inserisci(opera);
             model.addAttribute("opere", this.operaService.tutte());
-           String uploadDir ="photos/"+ opera.getId();
+           String uploadDir ="opere-photos/"+ opera.getId();
             
            Path uploadPath = Paths.get(uploadDir);
            
