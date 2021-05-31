@@ -8,7 +8,7 @@
 	<div>
 		<h4>Inserisci i dati di un artista</h4>
 	</div>
-	<form th:action="@{/artista}" method="POST" th:object="${artista}">
+	<form th:action="@{/artista}" method="POST" th:object="${artista}" enctype ="multipart/form-data">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
@@ -48,8 +48,15 @@
 				<span><input type="text" th:field="*{nazionalita}" /></span>
 				<span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
 			</div>
-		</form>
-		
+			<div>
+				<span>Immagine:</span>
+				<span><input type="file" name="img" accept="image/png, image/jpeg" /></span>
+			</div>
+			<div>
+				<span>Biografia:</span>
+				<span><input type="text" th:field="*{biografia}" style='width:200px; height:60px;padding-top:15px'/></span>
+			</div>
+			</form>
 			<div>
 				<span><button type="submit">Invio</button></span>
 			</div>

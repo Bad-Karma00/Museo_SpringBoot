@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
@@ -55,6 +56,11 @@ public class Artista implements Comparable<Artista>{
 	@OneToMany (mappedBy = "autore", cascade= {CascadeType.PERSIST})
 	private List<Opera> opere;
 	
+	@Column(nullable = true)
+	private String immagine;
+	
+	@Column(nullable=true)
+	private String biografia;
 	
 	public Artista() {
 		
@@ -150,9 +156,6 @@ public class Artista implements Comparable<Artista>{
 		this.opere = opere;
 	}
 	
-	private String immagine;
-
-
 	public String getImmagine() {
 		return immagine;
 	}
@@ -162,6 +165,22 @@ public class Artista implements Comparable<Artista>{
 		this.immagine = immagine;
 	}
 	
+	public String getBiografia() {
+		return biografia;
+	}
+
+
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
+	}
+	
+	 @Transient
+	    public String getPhotosImagePath() {
+	        if (immagine == null || id == null) return null;
+	         
+	        return "/photos/" +id+ "/" + immagine;
+	    }
+	 
 	@Override
 	public int compareTo(Artista artista){
 		int result;

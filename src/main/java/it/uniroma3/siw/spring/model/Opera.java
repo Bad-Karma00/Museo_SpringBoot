@@ -103,7 +103,7 @@ public class Opera implements Comparable<Opera> {
 	    public String getPhotosImagePath() {
 	        if (immagine == null || id == null) return null;
 	         
-	        return "/opere-photos/" + id + "/" + immagine;
+	        return "/photos/" + id + "/" + immagine;
 	    }
 	
 	public int compareTo(Opera opera){
