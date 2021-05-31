@@ -1,25 +1,31 @@
 package it.uniroma3.siw.spring;
 
-import static it.uniroma3.siw.spring.model.Credentials.ADMIN_ROLE;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
+import static it.uniroma3.siw.spring.model.Credentials.ADMIN_ROLE;
+//import static it.uniroma3.siw.spring.model.Credentials.DEFAULT_ROLE;
+
+/**
+ * The AuthConfiguration is a Spring Security Configuration.
+ * It extends WebSecurityConfigurerAdapter, meaning that it provides the settings for Web security.
+ */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	 /**
+    /**
      * The datasource is automatically injected into the AuthConfiguration (using its getters and setters)
      * and it is used to access the DB to get the Credentials to perform authentiation and authorization
      */
@@ -32,21 +38,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // authorization paragraph: qui definiamo chi può accedere a cosa
-                .authorizeRequests()
-                // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
-                .antMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**").permitAll()
-                // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
-                .antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
-                .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                // tutti gli utenti autenticati possono accere alle pagine rimanenti 
-                .anyRequest().authenticated()
-
-                // login paragraph: qui definiamo come è gestita l'autenticazione
-                // usiamo il protocollo formlogin 
-                .and().formLogin().disable();
+        .authorizeRequests()
+		.antMatchers("/","/index","/css/**","/img/**").permitAll()
+			.antMatchers("/inserisciQuadro" , "/inserisciAutore","/pannelloAmministratore").access("hasAuthority('ADMIN')")
+			.anyRequest().authenticated()
+		.and()
+		.formLogin()
+			.loginPage("/login")
+			.permitAll()
+		.and()
+		.logout()
+		.logoutSuccessUrl("/?logout")
+			.permitAll();
     }
 
     /**
@@ -71,5 +74,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
