@@ -1,38 +1,36 @@
 <meta name="robots" http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
+<head  th:replace="fragments/baseForm.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
 <body>
-  
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseForm.html :: intestazione"></header>
   <div class="parallax">	
 	<div>
-		<h4>Inserisci i dati di un'opera</h4>
+		<div class= "Titolo">Inserisci i dati di un'opera</div>
 	</div>
 	<form th:action="@{/opera}" method="POST" th:object="${opera}" enctype ="multipart/form-data">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
-		<div>
-			<div>
+			<div class="form">
 				<span>Titolo:</span>
 				<span><input type="text" th:field="*{titolo}" /></span>
 				<span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
 			</div>		
-			<div>
+			<div class="form">
 				<span>Anno:</span>
 				<span><input type="text" th:field="*{anno}" /></span>
 				<span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Descrizione:</span>
 				<span><input type="text" th:field="*{descrizione}" /></span>
 				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 			</div>
-				<div>
+				<div class="form">
 				<span>Immagine:</span>
 				<span><input type="file" name="img" accept="image/png, image/jpeg" /></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Autore:</span>
 				<select  name="autoreSelezionato" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona un autore</option>
@@ -42,7 +40,7 @@
     			</option>
 				</select>
 			</div>
-			<div>
+			<div class="form">
 				<span>Collezione:</span>
 				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona una collezione</option>
@@ -51,9 +49,9 @@
     					th:text="${collezione.nome}">
     			</option>
 				</select>
-			</div>				
+			</div>			
 		</form>
-			<div>
+			<div class="form">
 				<span><button type="submit">Invio</button></span>
 			</div>
 		</div>
