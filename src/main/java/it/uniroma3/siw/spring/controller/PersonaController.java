@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.model.Persona;
 import it.uniroma3.siw.spring.service.PersonaService;
+import it.uniroma3.siw.spring.validator.PersonaValidator;
 
 @Controller
 public class PersonaController {

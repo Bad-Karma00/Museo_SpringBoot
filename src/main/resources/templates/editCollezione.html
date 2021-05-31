@@ -8,7 +8,7 @@
   <div>	
 		<h4>Seleziona la collezione che vuoi modificare e i nuovi dati</h4>
 	</div>
-	<form th:action="@{/modificaCollezione}" method="POST">
+	<form th:action="@{/modificaCollezione}" method="POST" th:object="${collezione}">
 			<div>
 				<span>Collezione da modificare:</span>
 				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
@@ -21,11 +21,11 @@
 			</div>
 			<div>
 				<span>Nome nuovo:</span>
-				<span><input type="text" th:field="*{nomeNuovo}"/></span>
+				<span><input type="text" th:field="*{nome}"/></span>
 			</div>		
 			<div>
 				<span>Descrizione nuova:</span>
-				<span><input type="text" th:field="*{descrizioneNuova}"/></span>
+				<span><input type="text" th:field="*{descrizione}"/></span>
 			</div>
 			<div>
 				<span>Curatore nuovo:</span>

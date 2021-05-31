@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
-
-
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"nome", "curatore_matricola"}))
@@ -34,7 +33,7 @@ public class Collezione implements Comparable<Collezione>{
 	@NotEmpty
 	private String descrizione;
 	
-	@ManyToOne(cascade= {CascadeType.REFRESH})
+	@ManyToOne(cascade= {CascadeType.PERSIST})
 	private Curatore curatore;
 	
 	@OneToMany (mappedBy = "collezione", cascade= {CascadeType.PERSIST})

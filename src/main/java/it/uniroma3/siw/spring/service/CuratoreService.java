@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.spring.model.Collezione;
 import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.repository.CuratoreRepository;
 
@@ -17,6 +19,9 @@ public class CuratoreService {
 
 	@Autowired
 	private CuratoreRepository curatoreRepository; 
+	
+	@Autowired
+	private CollezioneService collezioneService;
 	
 	@Transactional
 	public Curatore inserisci(Curatore curatore) {
@@ -53,6 +58,10 @@ public class CuratoreService {
 	
 	@Transactional
 	public void delete(Curatore curatore){
+		List<Collezione> collezioni = collezioneService.tutti();
+		for(Collezione collezione : collezioni) {
+			collezioneService.delete(collezione);
+		}
 		this.curatoreRepository.delete(curatore);
 	}
 	
