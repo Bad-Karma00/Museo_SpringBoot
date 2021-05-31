@@ -14,7 +14,7 @@
 		<div class="ImgC"><h4>Lista delle opere</h4>
 		<ul>
 			<li th:each="opera : ${opere}">
-				<div class="Img1"> <img src ="https://i.kym-cdn.com/photos/images/facebook/001/966/774/1bd.png"> 
+				<div class="Img1"> <img th:src="@{${opera.photosImagePath}}"> 
 				<a href="opera.html" 
 				   th:href="@{'/opera' + '/' + ${opera?.id}}" 
 				   th:text="|${opera?.titolo} ${opera?.anno} ${opera?.descrizione}|">Paolo Rossi</a>
