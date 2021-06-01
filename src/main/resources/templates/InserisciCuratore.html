@@ -1,55 +1,55 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
+<head  th:replace="fragments/baseForm.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseForm.html :: intestazione"></header>
   <div class="parallax">	
 	<div>
-		<h4>Inserisci i dati di un curatore</h4>
+		<div class="Titolo">Inserisci i dati di un curatore</div>
 	</div>
 	<form th:action="@{/curatore}" method="POST" th:object="${curatore}">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
 		<div>
-			<div>
+			<div class="form">
 				<span>Matricola:</span>
 				<span><input type="text" th:field="*{matricola}" /></span>
 				<span th:if="${#fields.hasErrors('matricola')}" th:errors="*{matricola}"></span>
 			</div>	
-			<div>
+			<div class="form">
 				<span>Nome:</span>
 				<span><input type="text" th:field="*{nome}" /></span>
 				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>		
-			<div>
+			<div class="form">
 				<span>Cognome:</span>
 				<span><input type="text" th:field="*{cognome}" /></span>
 				<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Data:</span>
 				<span><input type="text" th:field="*{data}" /></span>
 				<span th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Luogo di nascita:</span>
 				<span><input type="text" th:field="*{luogo}" /></span>
 				<span th:if="${#fields.hasErrors('luogo')}" th:errors="*{luogo}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>E-mail:</span>
 				<span><input type="text" th:field="*{mail}" /></span>
 				<span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Numero di telefono:</span>
 				<span><input type="text" th:field="*{numero}" /></span>
 				<span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></span>
 			</div>				
 		</form>
-			<div>
+			<div class="form">
 				<span><button type="submit">Invio</button></span>
 			</div>
 		</div>
