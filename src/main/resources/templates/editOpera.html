@@ -1,15 +1,15 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
+<head  th:replace="fragments/baseModifica.html :: headerfiles(title=#{pageTitle.operaInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseModifica.html :: intestazione"></header>
   <div class="parallax">
   <div>	
-		<h4>Seleziona l'opera che vuoi modificare e i nuovi dati</h4>
+		<div class="Titolo">Seleziona l'opera che vuoi modificare e i nuovi dati</div>
 	</div>
 	<form th:action="@{/modificaOpera}" method="POST" th:object="${opera}">
-			<div>
+			<div class="form">
 				<span>Opera da modificare:</span>
 				<select  name="operaSelezionata" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona l'opera</option>
@@ -19,19 +19,19 @@
     			</option>
 				</select>
 			</div>
-			<div>
+			<div class="form">
 				<span>Titolo nuovo:</span>
 				<span><input type="text" th:field="*{titolo}"/></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Anno nuovo:</span>
 				<span><input type="number" th:field="*{anno}"/></span>
 			</div>		
-			<div>
+			<div class="form">
 				<span>Descrizione nuova:</span>
 				<span><input type="text" th:field="*{descrizione}"/></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Autore nuovo:</span>
 				<select  name="artistaSelezionato" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona un artista</option>
@@ -41,8 +41,7 @@
     			</option>
 				</select>
 				</div>
-				
-				<div>
+				<div class="form">
 				<span>Collezione nuova:</span>
 				<select  name="collezioneSelezionata" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona una collezione</option>
@@ -52,9 +51,10 @@
     			</option>
 				</select>
 				</div>
+				<div class="form">
 				<span><button type="submit">Invio</button></span>
-			</div>			
+				</div>		
 		</form>
-   <div class="parallax"></div>
+		<div class="parallax"></div>
 </body>
 </html>
