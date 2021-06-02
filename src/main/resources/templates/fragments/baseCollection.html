@@ -9,16 +9,17 @@
 <body>
 	<header th:fragment="intestazione"> 
 <ul>
-  <li><a  href="/">Home</a></li>
+  <li><a class="active" href="/">Home</a></li>
   <li><a href="/informazioni">Informazioni</a></li>
-  <li class="dropdown" >
+  <li class="dropdown">
      <a href="/collezione">Collezioni</a>
     </li>
   <li class="dropdown1">
-    <a href="/artista">Autori</a>
+    <a href="/artista">Artisti</a>
   </li>
-  <li class="dropdown1" sec:authorize="isAnonymous()">
-    <a href="" class="dropbtn1">Operazioni</a>
+  <div sec:authorize="isAuthenticated()">
+  	<li class="dropdown1">
+      <a href="" class="dropbtn1">Operazioni</a>
     <div class="dropdown-content1">    
       <a href="/addCuratore">Aggiungi Curatore</a>
       <a href="/addOpera">Aggiungi Opera</a>
@@ -26,6 +27,7 @@
       <a href="/addCollezione">Aggiungi Collezione</a>
       <a href="/artista">Lista Artisti</a>
       <a href="/opera">Lista Opere</a>
+      <a href="/collezione">Lista Collezione</a>
 	  <a href="/rimOpera">Rimuovi Opera</a>
 	  <a href="/rimCollezione">Rimuovi Collezione</a>
 	  <a href="/rimCuratore">Rimuovi Curatore</a>
@@ -33,8 +35,17 @@
 	  <a href="/editOpera">Modifica Opere</a>
     </div>
   </li>
-  <li><a href="" sec:authorize="isAnonymous()">Login</a></li>
-  <li><a href="" sec:authorize="hasRole(ADMIN)">Logout</a></li>
+  </div>
+  <div  sec:authorize="!isAuthenticated()">
+  <li>
+  		<a href="/login">Login</a>
+  </li>
+  </div>
+  <div  sec:authorize="isAuthenticated()">
+  <li>
+  		<a href="/logout">Logout</a>
+  </li>
+  </div>
   </ul>
 	</header>
 	

@@ -1,8 +1,11 @@
 package it.uniroma3.siw.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,16 +36,6 @@ public class AuthenticationController {
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
 		return "registerUser";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET) 
-	public String showLoginForm (Model model) {
-		return "loginForm";
-	}
-	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
-	public String logout(Model model) {
-		return "index";
 	}
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
