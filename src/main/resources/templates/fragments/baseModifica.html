@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title)">
 	<meta charset="UTF-8" />
-	<link th:href="@{/css/cssHome.css}" rel="stylesheet">
+	<link th:href="@{/css/cssModifica.css}" rel="stylesheet">
 	<title th:text="${title}"></title>
 </head>
 <body>
@@ -10,7 +10,8 @@
 		<div class="bannerIMG">
     		<div class="bannerTXT">
     			<h1>MUSEO SUS</h1>
-     			<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
+     			<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>
+     			<div class="pannello">Pannello amministratore</div>  
     		</div>
   		</div>
 <ul>
@@ -22,9 +23,8 @@
   <li class="dropdown1">
     <a href="/artista">Artisti</a>
   </li>
-  <div>
-  	<li class="dropdown1">
-      <a href="" class="dropbtn1">Operazioni</a>
+  <li class="dropdown1">
+    <a href="" class="dropbtn1">Operazioni</a>
     <div class="dropdown-content1">    
       <a href="/addCuratore">Aggiungi Curatore</a>
       <a href="/addOpera">Aggiungi Opera</a>
@@ -38,20 +38,8 @@
 	  <a href="/rimCuratore">Rimuovi Curatore</a>
 	  <a href="/editCollezione">Modifica Collezione</a>
 	  <a href="/editOpera">Modifica Opere</a>
-	  <a href="/register">Registra un nuovo admin</a>
     </div>
   </li>
-  </div>
-  <div  sec:authorize="!isAuthenticated()">
-  <li>
-  		<a href="/login">Login</a>
-  </li>
-  </div>
-  <div  sec:authorize="isAuthenticated()">
-  <li>
-  		<a href="/logout">Logout</a>
-  </li>
-  </div>
   </ul>
 	</header>
 </body>

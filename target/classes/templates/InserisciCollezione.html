@@ -1,29 +1,29 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
+<head  th:replace="fragments/baseForm.html :: headerfiles(title=#{pageTitle.collezioneInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseForm.html :: intestazione"></header>
   <div class="parallax">
   <div>	
-		<h4>Inserisci i dati di una collezione</h4>
+		<div class="Titolo">Inserisci i dati di una collezione</div>
 	</div>
 	<form th:action="@{/collezione}" method="POST" th:object="${collezione}">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
 			<div>
-			<div>
+			<div class="form">
 				<span>Nome:</span>
 				<span><input type="text" th:field="*{nome}" /></span>
 				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>		
-			<div>
+			<div class="form">
 				<span>Descrizione:</span>
-				<span><input type="text" th:field="*{descrizione}" /></span>
+				<span><input type="text" th:field="*{descrizione}" style='width:200px; height:60px;padding-top:15px'/></span>
 				<span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Curatore:</span>
 				<select  name="curatoreSelezionato" id="autoUpdate" class="autoUpdate">
     			<option value="0">Seleziona un curatore</option>
@@ -32,10 +32,11 @@
     					th:text="${curatore.cognome}">
     			</option>
 				</select>
-				</div>
-				<span><button type="submit">Invio</button></span>
-			</div>			
+				</div>		
 		</form>
+		<div class="form">
+				<span><button type="submit">Invio</button></span>
+			</div>
 			</div>
    <div class="parallax"></div>
 </body>

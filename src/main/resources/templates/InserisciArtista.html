@@ -1,63 +1,63 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.artistaInserisci})"> </head>
+<head  th:replace="fragments/baseForm.html :: headerfiles(title=#{pageTitle.artistaInserisci})"> </head>
 <body>
   
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseForm.html :: intestazione"></header>
   <div class="parallax">	
 	<div>
-		<h4>Inserisci i dati di un artista</h4>
+		<div class="Titolo">Inserisci i dati di un artista</div>
 	</div>
 	<form th:action="@{/artista}" method="POST" th:object="${artista}" enctype ="multipart/form-data">
 		<div th:if="${#fields.hasGlobalErrors()}">
   			<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 		</div>		
 		<div>
-			<div>
+			<div class="form">
 				<span>Nome:</span>
 				<span><input type="text" th:field="*{nome}" /></span>
 				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 			</div>		
-			<div>
+			<div class="form">
 				<span>Cognome:</span>
 				<span><input type="text" th:field="*{cognome}" /></span>
 				<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Data di nascita:</span>
 				<span><input type="text" th:field="*{dataNascita}" /></span>
 				<span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Luogo di nascita:</span>
 				<span><input type="text" th:field="*{luogoNascita}" /></span>
 				<span th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Data di morte:</span>
 				<span><input type="text" th:field="*{dataMorte}" /></span>
 				<span th:if="${#fields.hasErrors('dataMorte')}" th:errors="*{dataMorte}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Luogo di morte:</span>
 				<span><input type="text" th:field="*{luogoMorte}" /></span>
 				<span th:if="${#fields.hasErrors('luogoMorte')}" th:errors="*{luogoMorte}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Nazionalità:</span>
 				<span><input type="text" th:field="*{nazionalita}" /></span>
 				<span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Immagine:</span>
 				<span><input type="file" name="img" accept="image/png, image/jpeg" /></span>
 			</div>
-			<div>
+			<div class="form">
 				<span>Biografia:</span>
 				<span><input type="text" th:field="*{biografia}" style='width:200px; height:60px;padding-top:15px'/></span>
 			</div>
 			</form>
-			<div>
+			<div class="form">
 				<span><button type="submit">Invio</button></span>
 			</div>
 		</div>

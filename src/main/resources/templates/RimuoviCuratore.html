@@ -1,15 +1,15 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.curatoreRimuovi})"> </head>
+<head  th:replace="fragments/baseElimina.html :: headerfiles(title=#{pageTitle.curatoreRimuovi})"> </head>
 <body>
   
-  <header th:replace="fragments/baseHome.html :: intestazione"></header>
+  <header th:replace="fragments/baseElimina.html :: intestazione"></header>
   <div class="parallax">	
 	<div>
-		<h4>Seleziona il curatore da rimuovere</h4>
+		<div class="Titolo">Seleziona il curatore da rimuovere</div>
 	</div>
 	<form th:action="@{/rimozioneCuratore}" method="POST" th:object="${curatore}">
-		<div>
+		<div class="form">
 			<span>Curatore:</span>
 			<select  name="curatoreSelezionato" id="autoUpdate" class="autoUpdate">
     		<option value="0">Seleziona un curatore</option>
@@ -18,7 +18,9 @@
     				th:text="${curatore.nome}">
     		</option>
 			</select>
+			<div class="form">
 			<span><button type="submit">Invio</button></span>
+			</div>
 		 </div>				
 		</form>
 			<div>
