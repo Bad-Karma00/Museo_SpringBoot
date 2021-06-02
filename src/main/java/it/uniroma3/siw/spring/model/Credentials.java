@@ -12,7 +12,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class Credentials {
 	
-	public static final String DEFAULT_ROLE = "DEFAULT";
+	
+	
 	public static final String ADMIN_ROLE = "ADMIN";
 	
 	
@@ -30,6 +31,9 @@ public class Credentials {
 
 	@Column (nullable = false)
 	String ruolo;
+	
+	@Column (nullable = false)
+	Boolean enabled;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
@@ -65,6 +69,11 @@ public class Credentials {
 		this.user = user;
 	}
 	
-	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 
 }
