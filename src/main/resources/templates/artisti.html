@@ -1,20 +1,23 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.artistaLista})"> </head>
+<head  th:replace="fragments/baseLista.html :: headerfiles(title=#{pageTitle.artistaLista})"> </head>
 <body>
-<header th:replace="fragments/baseHome.html :: intestazione"></header>
+<header th:replace="fragments/baseLista.html :: intestazione"></header>
   	
   	<div class="parallax">	
-	<div>
-    	<h4>Lista degli artisti</h4>
-		<ul>
-			<li th:each="artista : ${artisti}">
-				<a href="artista.html" 
-				   th:href="@{'/artista' + '/' + ${artista.id}}" 
-				   th:text="|${artista.nome} ${artista.cognome} ${artista.nazionalita}|">Paolo Rossi</a>
-			</li>
-		</ul>
+    	<div class="Titolo">Lista degli artisti</div>
+    	<div class="ImgR">
+    	<table class="lista">
+			<tr th:each="artista : ${artisti}">
+				   <td> <a th:href="@{'/artista' + '/' + ${artista.id}}" th:text="|${artista.nome} ${artista.cognome}|"/></a>
+				   </td>
+				    <td> <div class="ImgC"><img th:src="@{${artista.photosImagePath}}"></div>
+				   </td>
+				   </tr>
+		</table>
+		</div>
 	</div>
-	<div class="parallax">	
+
+	<div class="parallax">	</div>
 </body>
 </html>
