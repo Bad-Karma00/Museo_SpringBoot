@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 
 import java.io.IOException;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 
-import org.apache.tomcat.jni.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,12 +104,13 @@ public class OperaController {
     								 @ModelAttribute("collezioneSelezionata") Long collezioneID,
     								 @RequestParam(value="img") MultipartFile immagine,
     								 Model model, BindingResult bindingResult) throws IOException{
-    	    Opera operaDaRim = operaService.operaPerId(operaID);
-	   	   String fileName1 = StringUtils.cleanPath(operaDaRim.getImmagine());
+    	    
+    		Opera operaDaRim = operaService.operaPerId(operaID);
+	   	    String fileName1 = StringUtils.cleanPath(operaDaRim.getImmagine());
 	     	String uploadDir1 ="photos/"+ operaDaRim.getId();
-		   Path uploadPath1 = Paths.get(uploadDir1);
+		    Path uploadPath1 = Paths.get(uploadDir1);
 		    Path filePath1 = uploadPath1.resolve(fileName1);
-		   Files.delete(filePath1);
+		    Files.delete(filePath1);
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artistaNuovo = artistaService.artistaPerId(artistaID);
