@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 
+import org.apache.tomcat.jni.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +72,15 @@ public class OperaController {
     @RequestMapping(value = "/rimozioneOpera", method = RequestMethod.POST)
     public String rimozioneOpera(@ModelAttribute("opera") Opera opera,
     							 Model model, BindingResult bindingResult,
-								 @RequestParam(value = "operaSelezionata") Long operaID) {
+								 @RequestParam(value = "operaSelezionata") Long operaID) throws IOException {
     		List<Opera> opere = (List<Opera>) operaService.tutte();
     		Collections.sort(opere);
     		Opera operaDaRim = operaService.operaPerId(operaID);
+    	   	String fileName = StringUtils.cleanPath(operaDaRim.getImmagine());
+    	   	String uploadDir ="photos/"+ operaDaRim.getId();
+    		Path uploadPath = Paths.get(uploadDir);
+    		 Path filePath = uploadPath.resolve(fileName);
+    		 Files.delete(filePath);
     		this.operaService.delete(operaDaRim);
     		return "opere.html";
     }
@@ -96,9 +102,14 @@ public class OperaController {
     								 @ModelAttribute("descrizione") String descNuovo,
     								 @ModelAttribute("artistaSelezionato") Long artistaID,
     								 @ModelAttribute("collezioneSelezionata") Long collezioneID,
-    								 Model model, BindingResult bindingResult){
-    	
-    		
+    								 @RequestParam(value="img") MultipartFile immagine,
+    								 Model model, BindingResult bindingResult) throws IOException{
+    	    Opera operaDaRim = operaService.operaPerId(operaID);
+	   	   String fileName1 = StringUtils.cleanPath(operaDaRim.getImmagine());
+	     	String uploadDir1 ="photos/"+ operaDaRim.getId();
+		   Path uploadPath1 = Paths.get(uploadDir1);
+		    Path filePath1 = uploadPath1.resolve(fileName1);
+		   Files.delete(filePath1);
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artistaNuovo = artistaService.artistaPerId(artistaID);
@@ -106,7 +117,7 @@ public class OperaController {
         	List<Collezione> collezioni = (List<Collezione>) collezioneService.tutti();
         	Collections.sort(collezioni);
         	Collezione collezioneNuova = collezioneService.collezionePerId(collezioneID);
-        	
+        	String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
         	Opera operaNuova = new Opera();
         	operaNuova.setId(operaID);
         	operaNuova.setTitolo(titoloNuovo);
@@ -114,9 +125,25 @@ public class OperaController {
         	operaNuova.setDescrizione(descNuovo);
         	operaNuova.setAutore(artistaNuovo);
         	operaNuova.setCollezione(collezioneNuova);
+        	operaNuova.setImmagine(fileName);
+            operaNuova.setImmagine(immagine.getOriginalFilename());
         	
         	operaService.inserisci(operaNuova);
             model.addAttribute("opere", this.operaService.tutte());
+            String uploadDir ="photos/"+ operaNuova.getId();
+            
+            Path uploadPath = Paths.get(uploadDir);
+            
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+             
+            try (InputStream inputStream = immagine.getInputStream()) {
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ioe) {        
+                throw new IOException("Could not save image file: " + fileName, ioe);
+            }      
             return "opere.html";
     }
     

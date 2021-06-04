@@ -8,7 +8,7 @@
   <div>	
 		<div class="Titolo">Seleziona l'opera che vuoi modificare e i nuovi dati</div>
 	</div>
-	<form th:action="@{/modificaOpera}" method="POST" th:object="${opera}">
+	<form th:action="@{/modificaOpera}" method="POST" th:object="${opera}" enctype="multipart/form-data">
 			<div class="form">
 				<span>Opera da modificare:</span>
 				<select  name="operaSelezionata" id="autoUpdate" class="autoUpdate">
@@ -52,9 +52,14 @@
 				</select>
 				</div>
 				<div class="form">
+				<span>Immagine nuova:</span>
+				<span><input type="file" name="img" accept="image/png, image/jpeg" /></span>
+			    </div>
+				<div class="form">
 				<span><button type="submit">Invio</button></span>
 				</div>		
 		</form>
+		</div>
 		<div class="parallax"></div>
 </body>
 </html>
