@@ -6,27 +6,32 @@
   <div class="parallax">
     <div class="row">
       <div class="column">
-        <div class="Img1">
-          <img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg/800px-David_-_Napoleon_crossing_the_Alps_-_Malmaison2.jpg">
-            <div class="overlay">Cavallo funny</div>
+        <div class="Img1" th:if="${opera1}">
+          <img th:src="@{${opera1.photosImagePath}}">
+            <div class="overlay" th:text="${opera1.titolo}">Opera 1</div>
         </div>
+        <div th:unless="${opera1}"></div>
         
-        <div class="Img2"> 
-          <img src ="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c12c5e21-79bd-4999-82a7-8f5adcfba4fc/de8spm6-e92d8abc-df41-416f-9c58-91b06e6f29e1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYzEyYzVlMjEtNzliZC00OTk5LTgyYTctOGY1YWRjZmJhNGZjXC9kZThzcG02LWU5MmQ4YWJjLWRmNDEtNDE2Zi05YzU4LTkxYjA2ZTZmMjllMS5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.UOo_yxa_oTn8pOB5kQBYQHduU1XuUXCQ9wbgDhEjf9g">
-          <div class="overlay">Furry furrosa</div> 
-        </div>
+        
+        <div class="Img2" th:if="${opera2}"> 
+          <img th:src="@{${opera2.photosImagePath}}">
+          <div class="overlay" th:text="${opera2.titolo}">Opera 2</div>
+        </div>        
+        <div th:unless="${opera2}"></div>
       </div>
       
       <div class="column">
-        <div class="Img3">
-          <img src ="https://www.jing.fm/clipimg/full/177-1776299_download-little-pony-rainbow-dash-png.png">
-            <div class="overlay">Cavallo piccolo</div>
+        <div class="Img3" th:if="${opera3}">
+          <img th:src="@{${opera3.photosImagePath}}">
+            <div class="overlay" th:text="${opera3.titolo}">Opera 3</div>
         </div>
+        <div th:unless="${opera3}"></div>
         
-        <div class="Img4"> 
-          <img src ="https://i.imgur.com/baqLiFI.png">
-          <div class="overlay">Dio</div> 
+        <div class="Img4" th:if="${opera4}"> 
+         <img th:src="@{${opera4.photosImagePath}}">
+          <div class="overlay" th:text="${opera4.titolo}">Opera 4</div>
         </div>
+        <div th:unless="${opera4}"></div>
       </div>
  </div>
   
