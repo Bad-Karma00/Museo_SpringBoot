@@ -1,18 +1,20 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.collezioniLista})"> </head>
+<head  th:replace="fragments/baseLista.html :: headerfiles(title=#{pageTitle.collezioniLista})"> </head>
 <body>
-<header th:replace="fragments/baseHome.html :: intestazione"></header>
+<header th:replace="fragments/baseLista.html :: intestazione"></header>
   	<div class="parallax">	
 	<div>
-    	<h4>Lista delle collezioni</h4>
+    	<div class="Titolo">Lista delle collezioni</div>
+		<div class="lista">
 		<ul>
 			<li th:each="collezione : ${collezioni}">
 				<a href="collezione.html" 
 				   th:href="@{'/collezione' + '/' + ${collezione?.id}}" 
-				   th:text="|${collezione?.nome} ${collezione?.descrizione} ${collezione?.curatore?.cognome}|">Paolo Rossi</a>
+				   th:text="|${collezione?.nome} ${collezione?.curatore?.cognome}|">Paolo Rossi</a>
 			</li>
 		</ul>
+		</div>
 	</div>
 	</div>
 	<div class="parallax"> </div>	

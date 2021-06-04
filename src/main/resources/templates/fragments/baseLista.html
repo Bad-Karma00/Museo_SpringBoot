@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title)">
 	<meta charset="UTF-8" />
-	<link th:href="@{/css/cssHome.css}" rel="stylesheet">
+	<link th:href="@{/css/cssLista.css}" rel="stylesheet">
 	<title th:text="${title}"></title>
 </head>
 <body>
@@ -13,6 +13,7 @@
      			<p>Si può esistere senza arte, ma senza di essa non si può Vivere.</p>  
     		</div>
   		</div>
+  		<div class="lista1">
 <ul>
   <li><a class="active" href="/">Home</a></li>
   <li><a href="/informazioni">Informazioni</a></li>
@@ -22,7 +23,7 @@
   <li class="dropdown1">
     <a href="/artista">Artisti</a>
   </li>
-   <div  sec:authorize="isAuthenticated()">
+  <div>
   	<li class="dropdown1">
       <a href="" class="dropbtn1">Operazioni</a>
     <div class="dropdown-content1">    
@@ -38,7 +39,6 @@
 	  <a href="/rimCuratore">Rimuovi Curatore</a>
 	  <a href="/editCollezione">Modifica Collezione</a>
 	  <a href="/editOpera">Modifica Opere</a>
-	  <a href="/register">Registra un nuovo admin</a>
     </div>
   </li>
   </div>
@@ -53,6 +53,7 @@
   </li>
   </div>
   </ul>
+  </div>
 	</header>
 </body>
 </html>

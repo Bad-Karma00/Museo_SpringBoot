@@ -1,22 +1,23 @@
 <meta name="robots" content="noindex">
 <html xmlns:th="http://www.thymeleaf.org">
-<head  th:replace="fragments/baseHome.html :: headerfiles(title=#{pageTitle.opereLista})"> </head>
+<head  th:replace="fragments/baseLista.html :: headerfiles(title=#{pageTitle.opereLista})"> </head>
 <body>
 
-<header th:replace="fragments/baseHome.html :: intestazione"></header>
+<header th:replace="fragments/baseLista.html :: intestazione"></header>
   	
   	<div class="parallax">	
-	<div>
-    	<h4>Lista delle opere</h4>
-		<ul>
-			<li th:each="opera : ${opere}">
-				<a href="opera.html" 
-				   th:href="@{'/opera' + '/' + ${opera.id}}" 
-				   th:text="|${opera.titolo} ${opera.anno} ${opera.descrizione} ${opera?.autore?.nome} ${opera?.collezione?.nome}|">Paolo Rossi</a>
-			</li>
-		</ul>
-	</div>
+	<div class="Titolo">Lista delle Opere</div>
+    	<div class="ImgR">
+    	<table class="lista">
+			<tr th:each="opera : ${opere}">
+				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo} ${opera?.autore?.nome} ${opera?.autore?.cognome}|"/></a>
+				   </td>
+				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}"></div>
+				   </td>
+				   </tr>
+		</table>
 		</div>
+	</div>
 	<div class="parallax">	</div>
 </body>
 </html>
