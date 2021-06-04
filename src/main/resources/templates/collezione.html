@@ -4,7 +4,7 @@
   <div class="bannerIMG">
     <div class="bannerTXT">
     <h1  th:text="|${collezione?.nome}|">Robe</h1> 
-	<p th:text="|${curatore?.nome} ${curatore?.cognome} |"></p>
+	<p th:text="Curatore:|${curatore?.nome} ${curatore?.cognome} |"></p>
     </div>
   </div>
     <header th:replace="fragments/baseCollection.html :: intestazione"></header>
