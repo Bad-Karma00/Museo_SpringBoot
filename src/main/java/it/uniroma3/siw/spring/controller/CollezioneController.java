@@ -128,7 +128,7 @@ public class CollezioneController {
 
     @RequestMapping(value = "/collezione", method = RequestMethod.GET)
     public String getCollezione(Model model) {
-    		model.addAttribute("collezioni", this.collezioneService.tutti());
+    		model.addAttribute("collezioni", this.collezioneService.tutti());    		
     		return "collezioni.html";
     }
     

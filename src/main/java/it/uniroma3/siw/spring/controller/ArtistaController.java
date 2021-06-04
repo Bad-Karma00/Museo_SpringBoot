@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.controller;
 
 import java.io.IOException;
+import java.util.Date;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -58,6 +59,66 @@ public class ArtistaController {
     public String getArtista(Model model) {
     		model.addAttribute("artisti", this.artistaService.tutti());
     		return "artisti.html";
+    }
+    
+    @RequestMapping(value="/editArtista", method = RequestMethod.GET)
+    public String selezionaArtista(Model model) {
+    	logger.debug("editArtista");
+    	model.addAttribute("artista", new Artista());
+    	model.addAttribute("artisti", this.artistaService.tutti());
+        return "editArtista.html";
+    }
+    
+    @RequestMapping(value = "/modificaArtista", method = RequestMethod.POST)
+    public String modificaArtista(@ModelAttribute("artistaSelezionato") Long artistaID,
+    								 @ModelAttribute("nome") String nomeNuovo,
+    								 @ModelAttribute("cognome") String cognomeNuovo,
+    								 @ModelAttribute("dataNascita") Date dataNascita,
+    								 @ModelAttribute("luogoNascita") String luogoNascita,
+    								 @ModelAttribute("dataMorte") Date dataMorte,
+    								 @ModelAttribute("luogoMorte") String luogoMorte,
+    								 @ModelAttribute("nazionalita") String nazionalita,
+    								 @RequestParam(value="img") MultipartFile immagine,
+    								 Model model, BindingResult bindingResult) throws IOException{
+    	    
+    		Artista artistaDaRim = artistaService.artistaPerId(artistaID);
+	   	    String fileName1 = StringUtils.cleanPath(artistaDaRim.getImmagine());
+	     	String uploadDir1 ="photos/"+ artistaDaRim.getId();
+		    Path uploadPath1 = Paths.get(uploadDir1);
+		    Path filePath1 = uploadPath1.resolve(fileName1);
+		    Files.delete(filePath1);
+        	
+        	
+        	String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
+        	Artista artistaNuovo = new Artista();
+        	
+        	artistaNuovo.setId(artistaID);
+        	artistaNuovo.setNome(nomeNuovo);
+        	artistaNuovo.setCognome(cognomeNuovo);
+        	artistaNuovo.setDataNascita(dataNascita);
+        	artistaNuovo.setLuogoNascita(luogoNascita);
+        	artistaNuovo.setDataMorte(dataMorte);
+        	artistaNuovo.setLuogoMorte(luogoMorte);
+        	artistaNuovo.setNazionalita(nazionalita);        	
+            artistaNuovo.setImmagine(immagine.getOriginalFilename());
+        	
+        	artistaService.inserisci(artistaNuovo);
+            model.addAttribute("artisti", this.artistaService.tutti());
+            String uploadDir ="photos/"+ artistaNuovo.getId();
+            
+            Path uploadPath = Paths.get(uploadDir);
+            
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+             
+            try (InputStream inputStream = immagine.getInputStream()) {
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ioe) {        
+                throw new IOException("Could not save image file: " + fileName, ioe);
+            }      
+            return "artisti.html";
     }
     
     @RequestMapping(value = "/artista", method = RequestMethod.POST)
