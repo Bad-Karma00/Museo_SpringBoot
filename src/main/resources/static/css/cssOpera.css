@@ -89,11 +89,6 @@ li.dropdown1 {
     display: block;
 }
 
-ul a.active{
-  background-color: lightgreen;
-  color: black;
-}
-
 
 .parallax {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Botticelli-primavera.jpg/1920px-Botticelli-primavera.jpg");
@@ -106,25 +101,17 @@ ul a.active{
   background-size: cover;
 }
 
-.row{
-  display:flex; /*Dichiaro il contenitore come flexbox*/ 
-  flex-wrap: wrap; /*Serve a dire che gli elementi si "avvolgono" su se stessi se la finistra cambia direzione. In pratica vanno a capo se non c'è più spazio a destra invece che rimpicciolirsi o streccharsi*/
-  padding: 0 4px;
-  justify-content: center; /*Il contenuto delle righe (Quindi le colonne) vengono giustifica al centro quindi tutta la griglia viene messa al centro*/
-}
-
-.column {
-  flex: 25%; /*Cambia quanta % l'oggetto si prende all'interno della flexbox*/
-  max-width: 40%;
-  padding: 0 4px;
+.card{
+	text-align:center;
 }
 
 
-.column img {
+.card img {
   margin-top: 8px;
   vertical-align: middle;
-  width: 100%;
+  max-width: 100%;
   object-fit:cover;
+  padding-bottom:25px;
 }
 
 .overlay{
@@ -140,18 +127,20 @@ ul a.active{
   text-align: center;
 }
 
-.Img1:hover .overlay{
-  opacity:1;
+
+.container{
+	text-align:center;
+	font-size:25px;
+	color:Gainsboro;
+	    background-color: #333;
 }
 
-.Img2:hover .overlay{
-  opacity:1;
+a{
+	color:Gold;
+	font-style:normal;
 }
 
-.Img3:hover .overlay{
-  opacity:1;
-}
-
-.Img4:hover .overlay{
-  opacity:1;
+.desc{
+	padding:30px;
+	text-align:left;
 }
