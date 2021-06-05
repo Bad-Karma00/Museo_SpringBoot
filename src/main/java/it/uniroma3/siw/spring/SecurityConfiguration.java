@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	http
 		.authorizeRequests()
-		.antMatchers("/","/index","/artista","/artisti","/artista/**","/collezione","/collezione/**","/collezioni","/informazioni","/opera","/opera/**","/opere","/css/**","/img/**","/photos/**").permitAll()
+		.antMatchers("/","/index","/artista","/artisti","/artista/**","/collezione","/collezione/**","/collezioni","/informazioni","/opera","/opera/**","/opere","/ordineAlfabeticoArtista","/ordineAlfabetico","/ordinePerAnno","/css/**","/img/**","/photos/**").permitAll()
 			.antMatchers("/editCollezione", "/editOpera", "InserisciArtista", "InserisciCollezione", "InserisciCuratore", "InserisciOpera", "registerUser", "registrationSuccessful", "RimuoviCollezione", "RimuoviCuratore", "RimuoviOpera").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 		.and()
