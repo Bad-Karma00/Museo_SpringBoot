@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Collections;
-
+import java.util.Comparator;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -204,5 +204,41 @@ public class OperaController {
             return "opere.html";
         }
         return "InserisciOpera.html";
+    }
+    
+    @RequestMapping(value="/ordineAlfabetico", method = RequestMethod.GET)
+    public String ordineAlfabetico(Model model) {
+    		logger.debug("ordineAlfabetico");
+    		List<Opera> opereAlfabetico = this.operaService.tutte();
+    		
+    		if (opereAlfabetico.size() > 0) {
+    			  Collections.sort(opereAlfabetico, new Comparator<Opera>() {
+    			      @Override
+    			      public int compare(final Opera opera1, final Opera opera2) {
+    			          return opera1.getTitolo().compareTo(opera2.getTitolo());
+    			      }
+    			  });
+    			}
+    		model.addAttribute("opere", opereAlfabetico);
+    		
+        	return "opere.html";
+    }
+    
+    @RequestMapping(value="/ordinePerAnno", method = RequestMethod.GET)
+    public String ordinePerAnno(Model model) {
+    		logger.debug("ordinePerAnno");
+    		List<Opera> opereAnno = this.operaService.tutte();
+    		
+    		if (opereAnno.size() > 0) {
+    			  Collections.sort(opereAnno, new Comparator<Opera>() {
+    			      @Override
+    			      public int compare(final Opera opera1, final Opera opera2) {
+    			          return opera1.getAnno().compareTo(opera2.getAnno());
+    			      }
+    			  });
+    			}
+    		model.addAttribute("opere", opereAnno);
+    		
+        	return "opere.html";
     }
 }
