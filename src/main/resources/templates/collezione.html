@@ -9,7 +9,6 @@
   </div>
     <header th:replace="fragments/baseCollection.html :: intestazione"></header>
   <div class="parallax">
-  
 <div class="Titolo">Lista delle Opere</div>
     	<div class="ImgR">
     	<table class="lista">
@@ -21,6 +20,7 @@
 				   </tr>
 		</table>
 		</div>
+		<div class="desc" th:text="|${collezione?.descrizione}|"></div> 
 	</div>
 	<div class="parallax">	</div>
 </body>
