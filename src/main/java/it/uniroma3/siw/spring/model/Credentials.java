@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "credentials")
-main
 public class Credentials {
 	
 	
