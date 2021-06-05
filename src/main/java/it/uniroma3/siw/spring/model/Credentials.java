@@ -11,7 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="credentials")
+@Table(name = "credentials")
+main
 public class Credentials {
 	
 	

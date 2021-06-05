@@ -1,8 +1,10 @@
 package it.uniroma3.siw.spring.controller;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-
+import java.util.List;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.spring.model.Artista;
+
 import it.uniroma3.siw.spring.service.ArtistaService;
 import it.uniroma3.siw.spring.validator.ArtistaValidator;
 
@@ -148,6 +151,31 @@ public class ArtistaController {
             return "artisti.html";
         }
         return "InserisciArtista.html";
+    }
+    
+    @RequestMapping(value="/ordineAlfabeticoArtista", method = RequestMethod.GET)
+    public String ordineAlfabeticoArtista(Model model) {
+    		logger.debug("ordineAlfabeticoArtista");
+    		List<Artista> artistaAlfabetico = this.artistaService.tutti();
+    		
+    		if (artistaAlfabetico.size() > 0) {
+    			  Collections.sort(artistaAlfabetico, new Comparator<Artista>() {
+    			      @Override
+    			      public int compare(final Artista artista1, final Artista artista2) {
+    			    	  int differenza = 0;
+    			          differenza = artista1.getNome().compareTo(artista2.getNome());
+    			          if(differenza == 0) {
+    			        	  return artista1.getCognome().compareTo(artista2.getCognome());
+    			          }
+    			          else {
+    			        	  return differenza;
+    			          }
+    			      }
+    			  });
+    			}
+    		model.addAttribute("artisti", artistaAlfabetico);
+    		
+        	return "artisti.html";
     }
  
 }
