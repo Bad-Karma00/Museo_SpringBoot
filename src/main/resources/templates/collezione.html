@@ -10,20 +10,18 @@
     <header th:replace="fragments/baseCollection.html :: intestazione"></header>
   <div class="parallax">
   
-  <div class="ImgR">
-		<div class="ImgC"><h4>Lista delle opere</h4>
-		<ul>
-			<li th:each="opera : ${opere}">
-				<div class="Img1"> <img th:src="@{${opera.photosImagePath}}"> 
-				<a href="opera.html" 
-				   th:href="@{'/opera' + '/' + ${opera?.id}}" 
-				   th:text="|${opera?.titolo} ${opera?.anno} ${opera?.descrizione}|">Paolo Rossi</a>
-			</div>
-			</li>
-		</ul>
-</div>
-  </div>
-  </div>
+<div class="Titolo">Lista delle Opere</div>
+    	<div class="ImgR">
+    	<table class="lista">
+			<tr th:each="opera : ${opere}">
+				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo} ${opera?.autore?.nome} ${opera?.autore?.cognome}|"/></a>
+				   </td>
+				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}"></div>
+				   </td>
+				   </tr>
+		</table>
+		</div>
+	</div>
 	<div class="parallax">	</div>
 </body>
 </html>

@@ -3,12 +3,6 @@ body{
   margin:0;
 }
 
-p{
-font-style:italic;
-}
-
-
-
 .bannerIMG{
   padding:80px;
   text-align:center;
@@ -31,6 +25,76 @@ font-style:italic;
   padding: 10px;
 }
 
+.lista1 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.lista1 li {
+    float: left;
+}
+
+ .lista1 li a, .dropbtn, .dropbtn1 {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ .lista1 li a:hover, .lista1 .dropdown:hover .dropbtn {
+    background-color: lightgreen;
+}
+
+ .lista1 li a:hover,.lista1 .dropdown1:hover .dropbtn1 {
+    background-color: lightgreen;
+}
+
+ .lista1 li.dropdown {
+    display: inline-block;
+}
+
+ .lista1 li.dropdown1 {
+    display: inline-block;
+}
+
+ .lista1 .dropdown-content, .lista1 .dropdown-content1 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+ .lista1 .dropdown-content a,.lista1 .dropdown-content1 a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+ .lista1 .dropdown-content a:hover {background-color: #f1f1f1}
+
+
+ .lista1 .dropdown-content1 a:hover {background-color: #f1f1f1}
+
+ .lista1 .dropdown:hover .dropdown-content {
+    display: block;
+}
+ .lista1 .dropdown1:hover .dropdown-content1 {
+    display: block;
+}
+
+ .lista1 ul a.active{
+  background-color: lightgreen;
+  color: black;
+}
+
+
 .parallax {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Botticelli-primavera.jpg/1920px-Botticelli-primavera.jpg");
 
@@ -41,6 +105,7 @@ font-style:italic;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 
 .Testo{
   font-size:20px;
@@ -68,74 +133,7 @@ font-style:italic;
 }
 
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
 
-li {
-    float: left;
-}
-
-li a, .dropbtn, .dropbtn1 {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-    background-color: lightgreen;
-}
-
-li a:hover, .dropdown1:hover .dropbtn1 {
-    background-color: lightgreen;
-}
-
-li.dropdown {
-    display: inline-block;
-}
-
-li.dropdown1 {
-    display: inline-block;
-}
-
-.dropdown-content, .dropdown-content1 {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a, .dropdown-content1 a{
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-
-.dropdown-content1 a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.dropdown1:hover .dropdown-content1 {
-    display: block;
-}
-
-ul a.active{
-  background-color: lightgreen;
-  color: black;
-}
 
 .InformazioniC2{
   flex: 35%; /*Cambia quanta % l'oggetto si prende all'interno della flexbox*/
@@ -201,14 +199,15 @@ ul a.active{
   text-align: center;
 }
 
-.Img1:hover .overlay{
-  opacity:1;
+a{
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+	
 }
 
-.Img2:hover .overlay{
-  opacity:1;
-}
-
-.Img3:hover .overlay{
-  opacity:1;
-}
+	a:hover{
+	  background-color: BlueViolet;
+	}

@@ -10,8 +10,6 @@
   <header th:replace="fragments/baseOpera.html :: intestazione"></header>
   
   <div class="parallax">
-    	<div class="row" >
-			<div class ="column">
 				<div class ="card">
 				<img th:src="@{${opera.photosImagePath}}" class="center">
 						<div th:if="${opera}" th:object="${opera}" class="container">
@@ -19,18 +17,17 @@
 							<br>
 							Anno:<span th:text="*{anno}">qui-va-anno</span>
 							<br>
+							Autore:<a  th:href="@{'/artista' + '/' + ${opera?.autore?.id}}"  th:text="|*{autore?.nome} *{autore?.cognome}|">qui-va-autore</a>
+							<br>
+						    Collezione:<a th:href="@{'/collezione' + '/' + ${opera?.collezione?.id}}"  th:text="*{collezione?.nome}">qui-va-collezione</a>
+						    <br>
+						    <div class="desc">
 							Descrizione:<span th:text="*{descrizione}">qui-va-descrizione</span>
-							<br>
-							Autore:<span th:text="*{autore?.nome}">qui-va-autore</span>
-							<br>
-							Collezione:<span th:text="*{collezione?.nome}">qui-va-collezione</span>
+							</div>
 						</div>
 						<div th:unless="${opera}">Non esiste</div>
 					</div>
 				</div>
-			</div>
-    	
-    </div>
     <div class="parallax"></div>
 </body>
 </html>
