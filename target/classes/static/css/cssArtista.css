@@ -67,6 +67,7 @@ body{
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+     z-index:10;
 }
 
  .lista1 .dropdown-content a,.lista1 .dropdown-content1 a{
@@ -138,7 +139,7 @@ body{
 .InformazioniC2{
   flex: 35%; /*Cambia quanta % l'oggetto si prende all'interno della flexbox*/
   max-width: 100%;
-  padding: 0 10px;
+  padding: 15 10px;
 }
 
 .card {
