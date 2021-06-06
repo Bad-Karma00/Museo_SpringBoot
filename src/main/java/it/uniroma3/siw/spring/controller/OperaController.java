@@ -77,11 +77,13 @@ public class OperaController {
     		Collections.sort(opere);
     		Opera operaDaRim = operaService.operaPerId(operaID);
     	   	String fileName = StringUtils.cleanPath(operaDaRim.getImmagine());
-    	   	String uploadDir ="photos/"+ operaDaRim.getId();
+    	   	String uploadDir ="photos/"+ operaDaRim.getId()+operaDaRim.getTitolo();
     		Path uploadPath = Paths.get(uploadDir);
     		 Path filePath = uploadPath.resolve(fileName);
     		 Files.delete(filePath);
+    		 Files.delete(uploadPath);
     		this.operaService.delete(operaDaRim);
+    		model.addAttribute("opere", this.operaService.tutte());
     		return "opere.html";
     }
     
@@ -107,7 +109,7 @@ public class OperaController {
     	    
     		Opera operaDaRim = operaService.operaPerId(operaID);
 	   	    String fileName1 = StringUtils.cleanPath(operaDaRim.getImmagine());
-	     	String uploadDir1 ="photos/"+ operaDaRim.getId();
+	     	String uploadDir1 ="photos/"+ operaDaRim.getId()+operaDaRim.getTitolo();
 		    Path uploadPath1 = Paths.get(uploadDir1);
 		    Path filePath1 = uploadPath1.resolve(fileName1);
 		    Files.delete(filePath1);
@@ -131,7 +133,7 @@ public class OperaController {
         	
         	operaService.inserisci(operaNuova);
             model.addAttribute("opere", this.operaService.tutte());
-            String uploadDir ="photos/"+ operaNuova.getId();
+            String uploadDir ="photos/"+ operaNuova.getId()+operaNuova.getTitolo();
             
             Path uploadPath = Paths.get(uploadDir);
             
@@ -143,7 +145,7 @@ public class OperaController {
                 Path filePath = uploadPath.resolve(fileName);
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ioe) {        
-                throw new IOException("Could not save image file: " + fileName, ioe);
+                throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
             }      
             return "opere.html";
     }
@@ -187,7 +189,7 @@ public class OperaController {
         	opera.setCollezione(collezione);
         	this.operaService.inserisci(opera);
             model.addAttribute("opere", this.operaService.tutte());
-           String uploadDir ="photos/"+ opera.getId();
+           String uploadDir ="photos/"+ opera.getId()+opera.getTitolo();
             
            Path uploadPath = Paths.get(uploadDir);
            
@@ -199,7 +201,7 @@ public class OperaController {
                Path filePath = uploadPath.resolve(fileName);
                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
            } catch (IOException ioe) {        
-               throw new IOException("Could not save image file: " + fileName, ioe);
+               throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
            }      
             return "opere.html";
         }

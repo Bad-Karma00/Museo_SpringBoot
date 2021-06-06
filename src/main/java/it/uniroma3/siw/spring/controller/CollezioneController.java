@@ -78,6 +78,7 @@ public class CollezioneController {
     		Collections.sort(collezioni);
     		Collezione collezioneDaRim = collezioneService.collezionePerId(collezioneID);
     		this.collezioneService.delete(collezioneDaRim);
+            model.addAttribute("collezioni", this.collezioneService.tutti());
     		return "collezioni.html";
     }
     
