@@ -62,12 +62,13 @@ public class CollezioneService {
 	@Transactional
 	public void delete(Collezione collezione){
 		List<Opera> opere = operaService.tutte();
+		if(!(opere.isEmpty())) {
 		for(Opera opera : opere) {
-			if(opera.getCollezione().getId() == collezione.getId()) {
+			//if(opera.getCollezione().getId() == collezione.getId()) {
 				opera.setCollezione(null);
 			}
 		}
-
+		//}
 		this.collezioneRepository.delete(collezione);
 	}
 }

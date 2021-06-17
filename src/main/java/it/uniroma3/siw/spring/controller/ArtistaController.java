@@ -81,12 +81,12 @@ public class ArtistaController {
     								 @ModelAttribute("dataMorte") Date dataMorte,
     								 @ModelAttribute("luogoMorte") String luogoMorte,
     								 @ModelAttribute("nazionalita") String nazionalita,
-    								 @RequestParam(value="img") MultipartFile immagine,
+    								 @RequestParam(value="img", required=false) MultipartFile immagine,
     								 Model model, BindingResult bindingResult) throws IOException{
     	    
     		Artista artistaDaRim = artistaService.artistaPerId(artistaID);
 	   	    String fileName1 = StringUtils.cleanPath(artistaDaRim.getImmagine());
-	     	String uploadDir1 ="photos/"+ artistaDaRim.getId();
+	     	String uploadDir1 ="photos/"+ artistaDaRim.getId()+artistaDaRim.getNome()+artistaDaRim.getCognome();
 		    Path uploadPath1 = Paths.get(uploadDir1);
 		    Path filePath1 = uploadPath1.resolve(fileName1);
 		    Files.delete(filePath1);
@@ -107,7 +107,7 @@ public class ArtistaController {
         	
         	artistaService.inserisci(artistaNuovo);
             model.addAttribute("artisti", this.artistaService.tutti());
-            String uploadDir ="photos/"+ artistaNuovo.getId();
+            String uploadDir ="photos/"+ artistaNuovo.getId()+artistaNuovo.getNome()+artistaNuovo.getCognome();
             
             Path uploadPath = Paths.get(uploadDir);
             
@@ -134,7 +134,7 @@ public class ArtistaController {
         	artista.setImmagine(fileName);
         	this.artistaService.inserisci(artista);
             model.addAttribute("artisti", this.artistaService.tutti());
-            String uploadDir ="photos/"+ artista.getId();
+            String uploadDir ="photos/"+ artista.getId()+artista.getNome()+artista.getCognome();
             
             Path uploadPath = Paths.get(uploadDir);
             
@@ -146,7 +146,7 @@ public class ArtistaController {
                 Path filePath = uploadPath.resolve(fileName);
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ioe) {        
-                throw new IOException("Could not save image file: " + fileName, ioe);
+                throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
             }  
             return "artisti.html";
         }

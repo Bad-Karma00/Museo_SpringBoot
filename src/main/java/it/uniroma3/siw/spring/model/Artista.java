@@ -178,7 +178,7 @@ public class Artista implements Comparable<Artista>{
 	    public String getPhotosImagePath() {
 	        if (immagine == null || id == null) return null;
 	         
-	        return "/photos/" +id+ "/" + immagine;
+	        return "/photos/" +id+nome+cognome+ "/" + immagine;
 	    }
 	 
 	@Override
