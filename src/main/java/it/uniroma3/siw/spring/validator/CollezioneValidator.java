@@ -30,7 +30,7 @@ public class CollezioneValidator implements Validator {
 			logger.debug("confermato: valori non nulli");
 			if (this.collezioneService.alreadyExists((Collezione)o)) {
 				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
+				errors.reject("duplicate.collezione.nome");
 			}
 		}
 	}

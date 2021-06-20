@@ -4,7 +4,7 @@
 <body>
   <div class="bannerIMG">
     <div class="bannerTXT">
-    <h1 th:text="|${artista.nome} ${artista.cognome}"></h1>  
+    <h1 th:text="${artista.nome + ' ' + artista.cognome}"></h1>  
     </div>
   </div>
   <header th:replace="fragments/baseArtista.html :: intestazione"></header>

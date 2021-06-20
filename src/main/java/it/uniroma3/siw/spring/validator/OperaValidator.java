@@ -23,13 +23,16 @@ public class OperaValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titolo", "required");
-		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "autore", "required");
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "anno", "required");
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "descrizione", "required");
 
 		if (!errors.hasErrors()) {
 			logger.debug("confermato: valori non nulli");
 			if (this.operaService.alreadyExists((Opera)o)) {
 				logger.debug("e' un duplicato");
-				errors.reject("duplicato");
+				errors.reject("duplicate.opera.titolo");
 			}
 		}
 	}

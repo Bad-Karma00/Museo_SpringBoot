@@ -24,8 +24,12 @@
     	<div class="ImgR">
     	<table class="lista">
 			<tr th:each="opera : ${opere}">
-				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo} ${opera?.autore?.nome} ${opera?.autore?.cognome}|"/></a>
-				   </td>
+				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}"/></a></td>
+				   <td> <p th:if="${opera.autore == null}">Anonimo</p>
+				   <p th:unless="${opera.autore == null}" th:text="${opera.autore.nome}"></p></td>
+				   <td> <p th:if="${opera.autore == null}"></p>
+				   <p th:unless="${opera.autore == null}" th:text="${opera.autore.cognome}"></p></td>
+				  
 				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}"></div>
 				   </td>
 				   </tr>
