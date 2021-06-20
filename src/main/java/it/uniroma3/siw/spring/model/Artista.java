@@ -35,7 +35,7 @@ public class Artista implements Comparable<Artista>{
 	@NotEmpty
 	private String cognome;
 	
-	@Column (nullable = false)
+	@Column (nullable = true)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascita;
 	

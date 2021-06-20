@@ -10,8 +10,10 @@
 		<ul>
 			<li th:each="collezione : ${collezioni}">
 				<a href="collezione.html" 
-				   th:href="@{'/collezione' + '/' + ${collezione?.id}}" 
-				   th:text="|${collezione?.nome} ${collezione?.curatore?.cognome}|">Paolo Rossi</a>
+				   th:href="@{'/collezione' + '/' + ${collezione.id}}" 
+				   th:text="${collezione.nome}">Nome</a>
+				   <p th:if="${collezione.curatore == null}">Curatore sconosciuto!</p>
+				   <p th:unless="${collezione.curatore == null}" th:text="${collezione.curatore.cognome}">cognome</p>
 			</li>
 		</ul>
 		</div>

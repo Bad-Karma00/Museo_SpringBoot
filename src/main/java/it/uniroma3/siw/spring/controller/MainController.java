@@ -1,15 +1,14 @@
 package it.uniroma3.siw.spring.controller;
 
-import java.util.Collections;
-import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import it.uniroma3.siw.spring.model.Opera;
+import it.uniroma3.siw.spring.repository.OperaRepository;
 import it.uniroma3.siw.spring.service.OperaService;
 
 @Controller
@@ -17,6 +16,12 @@ public class MainController {
 
 	@Autowired
 	private OperaService operaService;
+	
+	@Autowired
+	private OperaRepository operaRepository;
+	
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping("/informazioni")
 	public String mostraInfo(Model model){
@@ -26,73 +31,26 @@ public class MainController {
 	@RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
 	public String index(Model model) {
 			
-			List<Opera> opere = (List<Opera>) operaService.tutte();
-
-			Collections.shuffle(opere);
+			int nOpere = operaRepository.contaOpere();
+			logger.debug("Opere contate: " + nOpere);
 			
-			if(opere.size()>=4) {	
-				
 			
-			model.addAttribute("opera1", opere.get(0));
+			Long randID1 = 1 + (long) (Math.random() * (nOpere - 0));
+			logger.debug("Primo ID random: " + randID1);
+			Long randID2 = 1 + (long) (Math.random() * (nOpere - 0));
+			logger.debug("Secondo ID random: " + randID2);
+			Long randID3 = 1 + (long) (Math.random() * (nOpere - 0));
+			logger.debug("Terzo ID random: " + randID3);
+			Long randID4 = 1 + (long) (Math.random() * (nOpere - 0));
+			logger.debug("Quarto ID random: " + randID4);
 			
-			model.addAttribute("opera2", opere.get(1));
+			model.addAttribute("opera1", operaService.operaPerId(randID1));
 			
-			model.addAttribute("opera3", opere.get(2));
+			model.addAttribute("opera2", operaService.operaPerId(randID2));
 			
-			model.addAttribute("opera4", opere.get(3));
+			model.addAttribute("opera3", operaService.operaPerId(randID3));
 			
-			}
-			
-			else if(opere.size()==3) {	
-				
-			
-			model.addAttribute("opera1", opere.get(0));
-			
-			model.addAttribute("opera2", opere.get(1));
-			
-			model.addAttribute("opera3", opere.get(2));
-			
-			model.addAttribute("opera4", null);
-			
-			}
-			
-			else if(opere.size()==2) {	
-				
-				
-				model.addAttribute("opera1", opere.get(0));
-				
-				model.addAttribute("opera2", opere.get(1));
-				
-				model.addAttribute("opera3", null);
-				
-				model.addAttribute("opera4", null);
-				
-			}
-			
-			else if(opere.size()==1) {	
-				
-				
-				model.addAttribute("opera1", opere.get(0));
-				
-				model.addAttribute("opera2", null);
-				
-				model.addAttribute("opera3", null);
-				
-				model.addAttribute("opera4", null);
-				
-			}
-			
-			else {
-				
-				model.addAttribute("opera1", null);
-				
-				model.addAttribute("opera2", null);
-				
-				model.addAttribute("opera3", null);
-				
-				model.addAttribute("opera4", null);
-				
-			}
+			model.addAttribute("opera4", operaService.operaPerId(randID4));
 			
 			return "index";
 	}

@@ -63,13 +63,13 @@ public class CuratoreController {
     @RequestMapping(value = "/curatore/{id}", method = RequestMethod.GET)
     public String getCuratore(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("curatore", this.curatoreService.curatorePerId(id));
-    	return "curatore.html";
+    	return "index.html";
     }
 
     @RequestMapping(value = "/curatore", method = RequestMethod.GET)
     public String getCuratori(Model model) {
     		model.addAttribute("curatori", this.curatoreService.tutti());
-    		return "curatori.html";
+    		return "index.html";
     }
     
     @RequestMapping(value = "/curatore", method = RequestMethod.POST)
