@@ -53,8 +53,8 @@ public class CuratoreController {
     public String rimozioneCuratore(@ModelAttribute("curatore") Curatore curatore,
     							 Model model, BindingResult bindingResult,
 								 @RequestParam(value = "curatoreSelezionato") Long curatoreID) {
-    		List<Curatore> opere = (List<Curatore>) curatoreService.tutti();
-    		Collections.sort(opere);
+    		List<Curatore> curatori = (List<Curatore>) curatoreService.tutti();
+    		Collections.sort(curatori);
     		Curatore curatoreDaRim = curatoreService.curatorePerId(curatoreID);
     		this.curatoreService.delete(curatoreDaRim);
     		return "index.html";
