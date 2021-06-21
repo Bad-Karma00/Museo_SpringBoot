@@ -179,7 +179,7 @@ public class OperaController {
 			String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
 			opera.setImmagine(fileName);
         	//Recupero artista
-           opera.setImmagine(immagine.getOriginalFilename());
+            opera.setImmagine(immagine.getOriginalFilename());
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artista = artistaService.artistaPerId(autoreID);
@@ -205,6 +205,8 @@ public class OperaController {
            }      
             return "opere.html";
         }
+        model.addAttribute("artisti",this.artistaService.tutti());
+        model.addAttribute("collezioni",this.collezioneService.tutti());      
         return "InserisciOpera.html";
     }
     

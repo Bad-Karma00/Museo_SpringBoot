@@ -59,6 +59,7 @@ public class CollezioneController {
             model.addAttribute("collezioni", this.collezioneService.tutti());
             return "collezioni.html";
         }
+       model.addAttribute("curatori",this.curatoreService.tutti());      
        return "InserisciCollezione.html";
     }
     
