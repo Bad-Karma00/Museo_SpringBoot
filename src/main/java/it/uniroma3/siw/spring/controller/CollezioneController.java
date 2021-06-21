@@ -118,9 +118,14 @@ public class CollezioneController {
     public String getCollezione(@PathVariable("id") Long id, Model model) {
     	Collezione collezione= this.collezioneService.collezionePerId(id);
     	List<Opera> opere = collezione.getOpereDellaCollezione();
-    	Curatore curatore= this.curatoreService.curatorePerId(collezione.getCuratore().getMatricola());
+    	if(collezione.getCuratore() == null) {
+    		model.addAttribute("curatore", null);
+    	}
+    	else {
+    		Curatore curatore= this.curatoreService.curatorePerId(collezione.getCuratore().getMatricola());
+        	model.addAttribute("curatore", curatore);
+    	}
     	model.addAttribute("collezione", collezione);
-    	model.addAttribute("curatore", curatore);
     	model.addAttribute("opere", opere);
     	return "collezione.html";
     }
