@@ -8,13 +8,14 @@ body{
   text-align:center;
   background-image:linear-gradient(rgba(0,0,0,0.3),
     rgba(0,0,0,0.3)),
-    url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Untitled_%28First_Abstract_Watercolor%29_by_Wassily_Kandinsky.jpg/1200px-Untitled_%28First_Abstract_Watercolor%29_by_Wassily_Kandinsky.jpg");
+    url("/images/acquerello.jpg");
   font-size:65px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 
 .bannerTXT{
   font-family:brush script m7;
@@ -97,7 +98,7 @@ body{
 
 
 .parallax {
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Botticelli-primavera.jpg/1920px-Botticelli-primavera.jpg");
+  background-image: url("/images/primavera.jpg");
 
   min-height: 400px; 
 
@@ -140,6 +141,7 @@ body{
   flex: 35%; /*Cambia quanta % l'oggetto si prende all'interno della flexbox*/
   max-width: 100%;
   padding: 15 10px;
+  font-size:20px;
 }
 
 .card {

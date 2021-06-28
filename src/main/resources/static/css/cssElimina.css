@@ -8,7 +8,7 @@ body{
   text-align:center;
   background-image:linear-gradient(rgba(0,0,0,0.3),
     rgba(0,0,0,0.3)),
-    url("https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Untitled_%28First_Abstract_Watercolor%29_by_Wassily_Kandinsky.jpg/1200px-Untitled_%28First_Abstract_Watercolor%29_by_Wassily_Kandinsky.jpg");
+    url("/images/acquerello.jpg");
   font-size:65px;
   background-attachment: fixed;
   background-position: center;
@@ -101,7 +101,7 @@ ul a.active{
 
 
 .parallax {
-  background-image: url("https://www.analisidellopera.it/wp-content/uploads/2018/04/Caspar_David_Friedrich_Abbazia_nel_Querceto-1873x1200.jpg");
+  background-image: url("/images/abbazia.jpg");
 
   min-height: 400px; 
 

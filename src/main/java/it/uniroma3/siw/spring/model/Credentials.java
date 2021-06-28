@@ -12,12 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "credentials")
-public class Credentials {
-	
-	
+public class Credentials {	
 	
 	public static final String ADMIN_ROLE = "ADMIN";
-	
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -30,7 +27,6 @@ public class Credentials {
 	@Column (nullable = false)
 	private String password;
 	
-
 	@Column (nullable = false)
 	String ruolo;
 	

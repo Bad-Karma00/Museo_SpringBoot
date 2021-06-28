@@ -15,7 +15,7 @@
 		<div>
 			<div class="form">
 				<span>Matricola:</span>
-				<span><input type="text" th:field="*{matricola}" /></span>
+				<span><input type="number" th:field="*{matricola}" /></span>
 				<span th:if="${#fields.hasErrors('matricola')}" th:errors="*{matricola}"></span>
 			</div>	
 			<div class="form">
@@ -29,8 +29,8 @@
 				<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 			</div>
 			<div class="form">
-				<span>Data:</span>
-				<span><input type="text" th:field="*{data}" /></span>
+				<span>Data di nascita:</span>
+				<span><input type="date" th:field="*{data}" /></span>
 				<span th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></span>
 			</div>
 			<div class="form">
@@ -40,7 +40,7 @@
 			</div>
 			<div class="form">
 				<span>E-mail:</span>
-				<span><input type="text" th:field="*{mail}" /></span>
+				<span><input type="email" th:field="*{mail}" /></span>
 				<span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></span>
 			</div>
 			<div class="form">

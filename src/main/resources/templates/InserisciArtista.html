@@ -25,7 +25,7 @@
 			</div>
 			<div class="form">
 				<span>Data di nascita:</span>
-				<span><input type="text" th:field="*{dataNascita}" /></span>
+				<span><input type="date" th:field="*{dataNascita}" /></span>
 				<span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></span>
 			</div>
 			<div class="form">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="form">
 				<span>Data di morte:</span>
-				<span><input type="text" th:field="*{dataMorte}" /></span>
+				<span><input type="date" th:field="*{dataMorte}" /></span>
 				<span th:if="${#fields.hasErrors('dataMorte')}" th:errors="*{dataMorte}"></span>
 			</div>
 			<div class="form">

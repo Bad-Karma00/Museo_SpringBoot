@@ -12,12 +12,12 @@
   <div class="parallax">
   <div class="InformazioniR">
     <div class="InformazioniC1">
-	  <img th:src="@{${artista.photosImagePath}}">
+	  <img th:src="@{${artista.photosImagePath}}" onerror="this.style.display='none'">
   </div>
   
   <div class="InformazioniC2">
 	<div class="InfoContainer" th:if="${artista}" th:object="${artista}">
-		<div>Nome: <class="Testo" th:text="*{nome}"></div>
+		<div>Nome: <class= "Testo" th:text="*{nome}"></div>
 		<br>
 		<div>Cognome: <class="Testo" th:text="*{cognome}"></div>
 		<br>
@@ -45,7 +45,7 @@
 	<div class="ImgR">
 		<ul>
 			<li th:each="opera : ${artista.opere}">
-				<div class="ImgC"> <img th:src="@{${opera.photosImagePath}}"> 
+				<div class="ImgC"> <img th:src="@{${opera.photosImagePath}}" onerror="this.style.display='none'"> 
 				<a href="opera.html" 
 				   th:href="@{'/opera' + '/' + ${opera.id}}" 
 				   th:text="|${opera.titolo} ${opera.anno}|">Paolo Rossi</a>
@@ -55,5 +55,7 @@
 	</div>
 
 </div>
+  <div class="parallax"></div>
+
 </body>
 </html>

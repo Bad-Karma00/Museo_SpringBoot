@@ -19,8 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
-//import static it.uniroma3.siw.spring.model.Credentials.DEFAULT_ROLE;
-
 /**
  * The AuthConfiguration is a Spring Security Configuration.
  * It extends WebSecurityConfigurerAdapter, meaning that it provides the settings for Web security.
@@ -59,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	http
 		.authorizeRequests()
-		.antMatchers("/","/index","/artista","/artisti","/artista/**","/collezione","/collezione/**","/collezioni","/informazioni","/opera","/opera/**","/opere","/ordineAlfabeticoArtista","/ordineAlfabetico","/ordinePerAnno","/css/**","/img/**","/photos/**").permitAll()
+		.antMatchers("/","/index","/artista","/artisti","/artista/**","/collezione","/collezione/**","/collezioni","/informazioni","/opera","/opera/**","/opere","/ordineAlfabeticoCollezione","/ordineAlfabeticoArtista","/ordineAlfabetico","/ordinePerAnno","/css/**","/images/**","/photos/**").permitAll()
 			.antMatchers("/editCollezione", "/editOpera", "InserisciArtista", "InserisciCollezione", "InserisciCuratore", "InserisciOpera", "registerUser", "registrationSuccessful", "RimuoviCollezione", "RimuoviCuratore", "RimuoviOpera").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 		.and()

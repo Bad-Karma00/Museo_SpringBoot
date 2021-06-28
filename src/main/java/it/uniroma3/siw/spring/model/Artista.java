@@ -1,7 +1,7 @@
 package it.uniroma3.siw.spring.model;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,15 +36,15 @@ public class Artista implements Comparable<Artista>{
 	private String cognome;
 	
 	@Column (nullable = true)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataNascita;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataNascita;
 	
 	@Column (nullable = true)
 	private String luogoNascita;
 	
 	@Column (nullable = true)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataMorte;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataMorte;
 	
 	@Column (nullable = true)
 	private String luogoMorte;
@@ -59,7 +59,7 @@ public class Artista implements Comparable<Artista>{
 	@Column(nullable = true)
 	private String immagine;
 	
-	@Column(nullable=true)
+	@Column(nullable=true, length=1024)
 	private String biografia;
 	
 	public Artista() {
@@ -97,12 +97,12 @@ public class Artista implements Comparable<Artista>{
 	}
 
 
-	public Date getDataNascita() {
+	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
 
 
-	public void setDataNascita(Date dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 
@@ -117,12 +117,12 @@ public class Artista implements Comparable<Artista>{
 	}
 
 
-	public Date getDataMorte() {
+	public LocalDate getDataMorte() {
 		return dataMorte;
 	}
 
 
-	public void setDataMorte(Date dataMorte) {
+	public void setDataMorte(LocalDate dataMorte) {
 		this.dataMorte = dataMorte;
 	}
 

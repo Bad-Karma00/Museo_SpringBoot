@@ -3,14 +3,15 @@ package it.uniroma3.siw.spring.controller;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 
 
@@ -76,20 +77,18 @@ public class ArtistaController {
     public String modificaArtista(@ModelAttribute("artistaSelezionato") Long artistaID,
     								 @ModelAttribute("nome") String nomeNuovo,
     								 @ModelAttribute("cognome") String cognomeNuovo,
-    								 @ModelAttribute("dataNascita") Date dataNascita,
+    								 @ModelAttribute("dataNascita") LocalDate dataNascita,
     								 @ModelAttribute("luogoNascita") String luogoNascita,
-    								 @ModelAttribute("dataMorte") Date dataMorte,
+    								 @ModelAttribute("dataMorte") LocalDate dataMorte,
     								 @ModelAttribute("luogoMorte") String luogoMorte,
     								 @ModelAttribute("nazionalita") String nazionalita,
     								 @RequestParam(value="img", required=false) MultipartFile immagine,
     								 Model model, BindingResult bindingResult) throws IOException{
     	    
     		Artista artistaDaRim = artistaService.artistaPerId(artistaID);
-	   	    String fileName1 = StringUtils.cleanPath(artistaDaRim.getImmagine());
 	     	String uploadDir1 ="photos/"+ artistaDaRim.getId()+artistaDaRim.getNome()+artistaDaRim.getCognome();
 		    Path uploadPath1 = Paths.get(uploadDir1);
-		    Path filePath1 = uploadPath1.resolve(fileName1);
-		    Files.delete(filePath1);
+		    FileUtils.deleteDirectory(uploadPath1.toFile());;
         	
         	
         	String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());

@@ -29,7 +29,7 @@ public class Collezione implements Comparable<Collezione>{
 	@NotEmpty
 	private String nome;
 	
-	@Column (nullable = true)
+	@Column (nullable = true, length=1024)
 	@NotEmpty
 	private String descrizione;
 	
