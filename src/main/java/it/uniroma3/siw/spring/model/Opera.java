@@ -27,7 +27,7 @@ public class Opera implements Comparable<Opera> {
 	private Integer anno;
 	
 	
-	@Column (nullable = true)
+	@Column (nullable = true, length=1024)
 	private String descrizione;
 	
 	@ManyToOne (cascade= {CascadeType.REFRESH})

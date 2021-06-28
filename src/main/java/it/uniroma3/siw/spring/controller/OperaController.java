@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,12 +77,9 @@ public class OperaController {
     		List<Opera> opere = (List<Opera>) operaService.tutte();
     		Collections.sort(opere);
     		Opera operaDaRim = operaService.operaPerId(operaID);
-    	   	String fileName = StringUtils.cleanPath(operaDaRim.getImmagine());
     	   	String uploadDir ="photos/"+ operaDaRim.getId()+operaDaRim.getTitolo();
     		Path uploadPath = Paths.get(uploadDir);
-    		 Path filePath = uploadPath.resolve(fileName);
-    		 Files.delete(filePath);
-    		 Files.delete(uploadPath);
+    		  FileUtils.deleteDirectory(uploadPath.toFile());;
     		this.operaService.delete(operaDaRim);
     		model.addAttribute("opere", this.operaService.tutte());
     		return "opere.html";
@@ -108,11 +106,9 @@ public class OperaController {
     								 Model model, BindingResult bindingResult) throws IOException{
     	    
     		Opera operaDaRim = operaService.operaPerId(operaID);
-	   	    String fileName1 = StringUtils.cleanPath(operaDaRim.getImmagine());
 	     	String uploadDir1 ="photos/"+ operaDaRim.getId()+operaDaRim.getTitolo();
 		    Path uploadPath1 = Paths.get(uploadDir1);
-		    Path filePath1 = uploadPath1.resolve(fileName1);
-		    Files.delete(filePath1);
+		    FileUtils.deleteDirectory(uploadPath1.toFile());;
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artistaNuovo = artistaService.artistaPerId(artistaID);

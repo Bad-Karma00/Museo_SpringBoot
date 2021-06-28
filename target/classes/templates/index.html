@@ -7,7 +7,7 @@
     <div class="row">
       <div class="column">
         <div class="Img1" th:if="${opera1}">
-          <img th:src="@{${opera1.photosImagePath}}">
+          <img th:src="@{${opera1.photosImagePath}}" onerror="this.style.display='none'">
             <div class="overlay">
             <a th:href="@{'/opera' + '/' + ${opera1.id}}"  th:text="|${opera1.titolo}|">Opera 1</a>
             </div>
@@ -16,7 +16,7 @@
         
         
         <div class="Img2" th:if="${opera2}"> 
-          <img th:src="@{${opera2.photosImagePath}}">
+          <img th:src="@{${opera2.photosImagePath}}" onerror="this.style.display='none'">
           <div class="overlay">
            <a th:href="@{'/opera' + '/' + ${opera2.id}}"  th:text="|${opera2.titolo}|">Opera 2</a>
 		  </div>
@@ -26,7 +26,7 @@
       
       <div class="column">
         <div class="Img3" th:if="${opera3}">
-          <img th:src="@{${opera3.photosImagePath}}">
+          <img th:src="@{${opera3.photosImagePath}}" onerror="this.style.display='none'">
             <div class="overlay">
 			 <a th:href="@{'/opera' + '/' + ${opera3.id}}"  th:text="|${opera3.titolo}|">Opera 3</a>
 			</div>
@@ -34,7 +34,7 @@
         <div th:unless="${opera3}"></div>
         
         <div class="Img4" th:if="${opera4}"> 
-         <img th:src="@{${opera4.photosImagePath}}">
+         <img th:src="@{${opera4.photosImagePath}}" onerror="this.style.display='none'">
           <div class="overlay">
            <a th:href="@{'/opera' + '/' + ${opera4.id}}"  th:text="|${opera4.titolo}|">Opera 4</a>
           </div>
@@ -42,7 +42,7 @@
         <div th:unless="${opera4}"></div>
       </div>
  </div>
-  
+  </div>
    <div class="parallax"></div>
 </body>
 </html>

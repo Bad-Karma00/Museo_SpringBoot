@@ -1,0 +1,35 @@
+<meta name="robots" content="noindex">
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/baseLista.html :: headerfiles(title=#{pageTitle.artistaLista})"> </head>
+<body>
+<header th:replace="fragments/baseLista.html :: intestazione"></header>
+  	
+  	<div class="parallax">	
+    	<div class="Titolo">Lista degli artisti</div>
+    	
+    	<div class="lista">
+  		<ul>
+  			<li class="dropdown1">
+     			<a href="" class="dropbtn1">Ordine</a>
+     				<div class="dropdown-content1">    
+      					<a href="/ordineAlfabeticoCuratore">Alfabetico</a>
+      						<a href="/ordineMatricola">Matricola</a>
+      				</div>
+      			</li>
+      		</ul>
+		</div>
+    	
+    	<div class="ImgR">
+    	<table class="lista">
+			<tr th:each="curatore : ${curatori}">
+				   <td th:text="|${curatore.matricola} ${curatore.nome} ${curatore.cognome} ${curatore.data} ${curatore.luogo} ${curatore.mail} ${curatore.numero}|">
+				   </td>
+				   <td> <a class="testo" th:each="collezione : ${curatore?.collezioni}" th:href="@{'/collezione' + '/' + ${collezione.id}}" th:text=" ${collezione.nome}"></a></td>
+				   </tr>
+		</table>
+		</div>
+	</div>
+
+	<div class="parallax">	</div>
+</body>
+</html>

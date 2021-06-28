@@ -6,18 +6,29 @@
   	<div class="parallax">	
 	<div>
     	<div class="Titolo">Lista delle collezioni</div>
-		<div class="lista">
-		<ul>
-			<li th:each="collezione : ${collezioni}">
-				<a href="collezione.html" 
+	
+<div class="lista">
+  		<ul>
+  			<li class="dropdown1">
+     			<a href="" class="dropbtn1">Ordine</a>
+     				<div class="dropdown-content1">    
+      					<a href="/ordineAlfabeticoCollezione">Alfabetico</a>
+      				</div>
+      			</li>
+      		</ul>
+		</div>
+<table>
+			<tr th:each="collezione : ${collezioni}">
+				<td><a href="collezione.html" 
 				   th:href="@{'/collezione' + '/' + ${collezione.id}}" 
 				   th:text="${collezione.nome}">Nome</a>
 				   <p th:if="${collezione.curatore == null}">Curatore sconosciuto!</p>
 				   <p th:unless="${collezione.curatore == null}" th:text="${collezione.curatore.cognome}">cognome</p>
-			</li>
-		</ul>
+
+			</td>
+		</tr>
+		</table>
 		</div>
-	</div>
 	</div>
 	<div class="parallax"> </div>	
 </body>

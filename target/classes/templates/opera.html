@@ -19,14 +19,14 @@
 							<br>
 							Autore:
 							<span th:if="${opera.autore == null}">Anonimo</span>
-							<span th:unless="${opera.autore == null}" th:text="${opera.autore.nome + ' ' + opera.autore.cognome}"></span>
+							<a th:unless="${opera.autore == null}" th:href="@{'/artista' + '/' + ${opera.autore.id}}" th:text="|${opera.autore.nome} ${opera.autore.cognome}|"></a>
 							<br>
 						    Collezione:
 						    <span th:if="${opera.collezione == null}">Nessuna</span>
-							<span th:unless="${opera.collezione == null}" th:text="${opera.collezione.nome}"></span>
+							<a th:unless="${opera.collezione == null}" th:href="@{'/collezione' + '/' + ${opera.collezione.id}}" th:text="${opera.collezione.nome}"></a>
 							<br>
 						    <div class="desc">
-							Descrizione:<span th:text="*{descrizione}">qui-va-descrizione</span>
+							Descrizione:<span th:text="${opera.descrizione}">qui-va-descrizione</span>
 							</div>
 						</div>
 						

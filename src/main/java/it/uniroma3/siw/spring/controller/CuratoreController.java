@@ -2,7 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 
 import java.util.Collections;
-
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,19 +56,14 @@ public class CuratoreController {
     		Collections.sort(curatori);
     		Curatore curatoreDaRim = curatoreService.curatorePerId(curatoreID);
     		this.curatoreService.delete(curatoreDaRim);
-    		return "index.html";
+    		return "curatori.html";
     }
 
-    @RequestMapping(value = "/curatore/{id}", method = RequestMethod.GET)
-    public String getCuratore(@PathVariable("id") Long id, Model model) {
-    	model.addAttribute("curatore", this.curatoreService.curatorePerId(id));
-    	return "index.html";
-    }
 
     @RequestMapping(value = "/curatore", method = RequestMethod.GET)
     public String getCuratori(Model model) {
     		model.addAttribute("curatori", this.curatoreService.tutti());
-    		return "index.html";
+    		return "curatori.html";
     }
     
     @RequestMapping(value = "/curatore", method = RequestMethod.POST)
@@ -79,8 +73,50 @@ public class CuratoreController {
         if (!bindingResult.hasErrors()) {
         	this.curatoreService.inserisci(curatore);
             model.addAttribute("curatori", this.curatoreService.tutti());
-            return "index.html";
+            return "curatori.html";
         }
         return "InserisciCuratore.html";
     }
+    
+    @RequestMapping(value="/ordineAlfabeticoCuratore", method = RequestMethod.GET)
+    public String ordineAlfabeticoCuratore(Model model) {
+    		logger.debug("ordineAlfabetico");
+    		List<Curatore> curatoriAlfabetico = this.curatoreService.tutti();
+    		
+    		if (curatoriAlfabetico.size() > 0) {
+  			  Collections.sort(curatoriAlfabetico, new Comparator<Curatore>() {
+  			      @Override
+  			      public int compare(final Curatore curatore1, final Curatore curatore2 ) {
+  			    	  int differenza = 0;
+  			          differenza = curatore1.getNome().compareTo(curatore2.getNome());
+  			          if(differenza == 0) {
+  			        	  return curatore1.getCognome().compareTo(curatore2.getCognome());
+  			          }
+  			          else {
+  			        	  return differenza;
+  			          }
+  			      }
+  			  });
+  			}
+  		model.addAttribute("curatori", curatoriAlfabetico);
+  		
+      	return "curatori.html";
+  }
+    
+    @RequestMapping(value="/ordineMatricola", method = RequestMethod.GET)
+    public String ordineMatricola(Model model) {
+    		List<Curatore> curatoriMatricola = this.curatoreService.tutti();
+    		
+    		if (curatoriMatricola.size() > 0) {
+  			  Collections.sort(curatoriMatricola, new Comparator<Curatore>() {
+  			      @Override
+  			      public int compare(final Curatore curatore1, final Curatore curatore2 ) {
+  			    	return curatore1.getMatricola().compareTo(curatore2.getMatricola());
+  			      }
+  			  });
+  			}
+  		model.addAttribute("curatori", curatoriMatricola);
+  		
+      	return "curatori.html";
+  }
 }

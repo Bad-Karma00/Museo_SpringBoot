@@ -14,15 +14,22 @@
     	<div class="ImgR">
     	<table class="lista">
 			<tr th:each="opera : ${opere}">
-				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo} ${opera.autore.nome} ${opera.autore.cognome}">/></a>
+				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo} ${opera.autore.nome} ${opera.autore.cognome}|"></a>
 				   </td>
-				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}"></div>
+				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}" onerror="this.style.display='none'"></div>
 				   </td>
 			</tr>
 		</table>
-		</div>
-		<div class="desc" th:text="${collezione.descrizione}"></div> 
+		<div class="desc" th:text="${collezione.descrizione}"></div>
+		<table class="lista">
+			<tr th:each="instance : ${mappa}">
+    <td> <a th:href="@{'/artista' + '/' + ${instance.key.id}}" th:text="|${instance.key.nome} ${instance.key.cognome}|"></a></td>
+    <td th:text="${instance.value}"></td>
+</tr>
+		</table> 
 	</div>
+	</div>
+	<div th:text="${lista}"></div>
 	<div class="parallax">	</div>
 </body>
 </html>

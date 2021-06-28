@@ -1,6 +1,6 @@
 package it.uniroma3.siw.spring.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,8 +23,8 @@ public class Curatore implements Comparable<Curatore> {
 	private String cognome;
 	
 	@Column (nullable = false)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date data;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate data;
 	
 	@Column (nullable = true)
 	private String luogo;
@@ -67,12 +67,12 @@ public class Curatore implements Comparable<Curatore> {
 	}
 
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
