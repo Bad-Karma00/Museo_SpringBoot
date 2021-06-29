@@ -1,13 +1,14 @@
 package it.uniroma3.siw.spring.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
+
+
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 
@@ -26,9 +27,7 @@ import it.uniroma3.siw.spring.model.Artista;
 import it.uniroma3.siw.spring.model.Collezione;
 import it.uniroma3.siw.spring.model.Curatore;
 import it.uniroma3.siw.spring.model.Opera;
-import it.uniroma3.siw.spring.repository.ArtistaRepository;
 import it.uniroma3.siw.spring.repository.CollezioneRepository;
-import it.uniroma3.siw.spring.service.ArtistaService;
 import it.uniroma3.siw.spring.service.CollezioneService;
 import it.uniroma3.siw.spring.service.CuratoreService;
 import it.uniroma3.siw.spring.validator.CollezioneValidator;
@@ -38,12 +37,6 @@ public class CollezioneController {
 	
 	@Autowired
 	private CollezioneService collezioneService;
-	
-	@Autowired
-	private ArtistaService artistaService;
-	
-	@Autowired
-	private ArtistaRepository artistaRepository;
 	
 	@Autowired
 	private CollezioneRepository collezioneRepository;
@@ -146,31 +139,22 @@ public class CollezioneController {
     		Curatore curatore= this.curatoreService.curatorePerId(collezione.getCuratore().getMatricola());
         	model.addAttribute("curatore", curatore);
     	}
+
+    	List<Artista>lista = this.collezioneRepository.countAutori(id);
+    	List<Integer>lista2=this.collezioneRepository.countOpere(id);
     	
-    	/*List<String>lista=this.collezioneRepository.countOpere(collezione);
-    	List<String>lista2=this.collezioneRepository.countOpere(collezione);
-    	List<String> li=new ArrayList<>();
-    	Map<Artista,String> mappa= new HashMap<>();
-    	for(int i=0;i<lista.size();i++) {
-    		String stringa= lista.get(i).replaceAll(",", " ");
-       String[] stringhe= stringa.split(" ");
-     for(String s : stringhe) {
-    	 li.add(s);
-     }
-    	}
-    	for(int i=2;i<li.size();i=i+3) {
-    	lista2.add(li.get(i));
-    	}*/
-    	Map<Artista,Integer>mappa=new HashMap<>();
-    	for(Opera o:opere) {
-    		if(!mappa.containsKey(o.getAutore())) {
-    			mappa.put(o.getAutore(), 1);
-    		}
-    		else mappa.put(o.getAutore(),mappa.get(o.getAutore())+1);
-    	}
+    	logger.debug(lista.toString());
+    	logger.debug(lista2.toString());
+    	
+    	Map<Artista, Integer> map = IntStream.range(0, lista.size())
+                .boxed()
+                .collect(Collectors.toMap(i -> lista.get(i), i -> lista2.get(i)));
+    	
+    	logger.debug(map.toString());
+    	
     	model.addAttribute("collezione", collezione);
     	model.addAttribute("opere", opere);
-    	model.addAttribute("mappa", mappa);
+    	model.addAttribute("mappa", map);
     	return "collezione.html";
     }
 
