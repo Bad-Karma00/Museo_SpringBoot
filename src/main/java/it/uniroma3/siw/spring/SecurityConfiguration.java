@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/editCollezione", "/editOpera", "InserisciArtista", "InserisciCollezione", "InserisciCuratore", "InserisciOpera", "registerUser", "registrationSuccessful", "RimuoviCollezione", "RimuoviCuratore", "RimuoviOpera").access("hasAuthority('ADMIN')")
 			.anyRequest().authenticated()
 		.and()
-		.formLogin()
+		.formLogin().loginPage("/login").permitAll()
 		.and()
 		.logout().logoutUrl("/logout")
 		.logoutSuccessUrl("/index")
