@@ -15,7 +15,7 @@
     			<option value="0">Seleziona l'artista</option>
     			<option th:each="artista : ${artisti}"
     					th:value="${artista.id}" 
-    					th:text="${artista.nome}">
+    					th:text="|${artista.nome} ${artista.cognome}|">
     			</option>
 				</select>
 			</div>
@@ -26,25 +26,29 @@
 			<div class="form">
 				<span>Cognome nuovo:</span>
 				<span><input type="text" th:field="*{cognome}"/></span>
-			</div>		
-			<div class="form">
-				<span>Data di nascita nuova:</span>
-				<span><input type="text" th:field="*{dataNascita}"/></span>
 			</div>
 			<div class="form">
-				<span>Luogo di nascita nuova:</span>
+				<span>Biografia nuova:</span>
+				<span><input type="text" th:field="*{biografia}"/></span>
+			</div>			
+			<div class="form">
+				<span>Data di nascita nuova:</span>
+				<span><input type="date" th:field="*{dataNascita}"/></span>
+			</div>
+			<div class="form">
+				<span>Luogo di nascita nuovo:</span>
 				<span><input type="text" th:field="*{luogoNascita}"/></span>
 			</div>
 			<div class="form">
 				<span>Data di morte nuova:</span>
-				<span><input type="text" th:field="*{dataMorte}"/></span>
+				<span><input type="date" th:field="*{dataMorte}"/></span>
 			</div>
 			<div class="form">
 				<span>Luogo di morte nuovo:</span>
 				<span><input type="text" th:field="*{luogoMorte}"/></span>
 			</div>
 			<div class="form">
-				<span>Nazionalitànuova:</span>
+				<span>Nazionalit&aacute;&nbsp;nuova:</span>
 				<span><input type="text" th:field="*{nazionalita}"/></span>
 			</div>
 			<div class="form">

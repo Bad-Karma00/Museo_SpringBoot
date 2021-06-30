@@ -151,7 +151,27 @@ public class CollezioneController {
                 .collect(Collectors.toMap(i -> lista.get(i), i -> lista2.get(i)));
     	
     	logger.debug(map.toString());
-    	
+    	/*List<String>lista=this.collezioneRepository.countOpere(collezione);
+    	List<String>lista2=this.collezioneRepository.countOpere(collezione);
+    	List<String> li=new ArrayList<>();
+    	Map<Artista,String> mappa= new HashMap<>();
+    	for(int i=0;i<lista.size();i++) {
+    		String stringa= lista.get(i).replaceAll(",", " ");
+       String[] stringhe= stringa.split(" ");
+     for(String s : stringhe) {
+    	 li.add(s);
+     }
+    	}
+    	for(int i=2;i<li.size();i=i+3) {
+    	lista2.add(li.get(i));
+    	}*/
+    	Map<Artista,Integer> mappa=new HashMap<>();
+    	for(Opera o:opere) {
+    		if(!mappa.containsKey(o.getAutore())) {
+    			mappa.put(o.getAutore(), 1);
+    		}
+    		else mappa.put(o.getAutore(),mappa.get(o.getAutore())+1);
+    	}
     	model.addAttribute("collezione", collezione);
     	model.addAttribute("opere", opere);
     	model.addAttribute("mappa", map);

@@ -33,7 +33,7 @@
     			<option value="0">Seleziona un curatore</option>
     			<option th:each="curatore : ${curatori}"
     					th:value="${curatore.matricola}" 
-    					th:text="${curatore.cognome}">
+    					th:text="|${curatore.nome} ${curatore.cognome}|">
     			</option>
 				</select>
 				</div>

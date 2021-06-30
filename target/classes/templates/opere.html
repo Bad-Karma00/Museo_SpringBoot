@@ -26,7 +26,7 @@
 			<tr th:each="opera : ${opere}">
 				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}"/></a></td>
 				   <td> <p th:if="${opera.autore == null}">Anonimo</p>
-				   <a  th:unless="${opera.autore == null}" th:href="@{'/opera.autore' + '/' + ${opera.autore.id}}" th:text="|${opera.autore.nome} ${opera.autore.cognome}|"></a></td> 
+				   <a  th:unless="${opera.autore == null}" th:href="@{'/artista' + '/' + ${opera.autore.id}}" th:text="|${opera.autore.nome} ${opera.autore.cognome}|"></a></td> 
 				   <td th:text="${opera.anno} "></td>
 				   </tr>
 		</table>

@@ -77,9 +77,11 @@ public class OperaController {
     		List<Opera> opere = (List<Opera>) operaService.tutte();
     		Collections.sort(opere);
     		Opera operaDaRim = operaService.operaPerId(operaID);
+    		if(!(operaDaRim.getImmagine()==null)) {
     	   	String uploadDir ="photos/"+ operaDaRim.getId()+operaDaRim.getTitolo();
     		Path uploadPath = Paths.get(uploadDir);
     		  FileUtils.deleteDirectory(uploadPath.toFile());;
+    		}
     		this.operaService.delete(operaDaRim);
     		model.addAttribute("opere", this.operaService.tutte());
     		return "opere.html";
@@ -124,11 +126,15 @@ public class OperaController {
         	operaNuova.setDescrizione(descNuovo);
         	operaNuova.setAutore(artistaNuovo);
         	operaNuova.setCollezione(collezioneNuova);
+        	if(!(immagine.getSize()==0)) {
         	operaNuova.setImmagine(fileName);
             operaNuova.setImmagine(immagine.getOriginalFilename());
-        	
+        	}
+        	else { operaNuova.setImmagine(null);}
         	operaService.inserisci(operaNuova);
+        	
             model.addAttribute("opere", this.operaService.tutte());
+            if(!(immagine.getSize()==0)) {
             String uploadDir ="photos/"+ operaNuova.getId()+operaNuova.getTitolo();
             
             Path uploadPath = Paths.get(uploadDir);
@@ -142,7 +148,8 @@ public class OperaController {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ioe) {        
                 throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
-            }      
+            }  
+            }
             return "opere.html";
     }
     
@@ -172,10 +179,12 @@ public class OperaController {
         	List<Collezione> collezioni = (List<Collezione>) collezioneService.tutti();
         	Collections.sort(collezioni);
         	Collezione collezione = collezioneService.collezionePerId(collezioneID);
+        	if(!(immagine.getSize()==0)) {
 			String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
 			opera.setImmagine(fileName);
         	//Recupero artista
             opera.setImmagine(immagine.getOriginalFilename());
+        	}
         	List<Artista> artisti = (List<Artista>) artistaService.tutti();
         	Collections.sort(artisti);
         	Artista artista = artistaService.artistaPerId(autoreID);
@@ -185,8 +194,9 @@ public class OperaController {
         	opera.setCollezione(collezione);
         	this.operaService.inserisci(opera);
             model.addAttribute("opere", this.operaService.tutte());
+            if(!(immagine.getSize()==0)) {
            String uploadDir ="photos/"+ opera.getId()+opera.getTitolo();
-            
+           String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
            Path uploadPath = Paths.get(uploadDir);
            
            if (!Files.exists(uploadPath)) {
@@ -198,7 +208,8 @@ public class OperaController {
                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
            } catch (IOException ioe) {        
                throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
-           }      
+           } 
+            }
             return "opere.html";
         }
         model.addAttribute("artisti",this.artistaService.tutti());

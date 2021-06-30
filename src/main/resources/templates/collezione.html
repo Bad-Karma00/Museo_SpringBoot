@@ -10,12 +10,13 @@
   </div>
     <header th:replace="fragments/baseCollection.html :: intestazione"></header>
   <div class="parallax">
-<div class="Titolo">Lista delle Opere</div>
+<div class="Titolo">Lista delle Opere nella Collezione</div>
     	<div class="ImgR">
     	<table class="lista">
 			<tr th:each="opera : ${opere}">
-				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="|${opera.titolo} ${opera.autore.nome} ${opera.autore.cognome}|"></a>
+				   <td> <a th:href="@{'/opera' + '/' + ${opera.id}}" th:text="${opera.titolo}"></a>
 				   </td>
+				     <td> <a th:href="@{'/artista' + '/' + ${opera.autore.id}}" th:text="|${opera.autore.nome} ${opera.autore.cognome}|"></a></td>
 				    <td> <div class="ImgC"><img th:src="@{${opera.photosImagePath}}" onerror="this.style.display='none'"></div>
 				   </td>
 			</tr>

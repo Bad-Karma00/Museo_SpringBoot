@@ -23,6 +23,8 @@
 			<tr th:each="artista : ${artisti}">
 				   <td> <a th:href="@{'/artista' + '/' + ${artista.id}}" th:text="|${artista.nome} ${artista.cognome}|"/></a>
 				   </td>
+				   <td></td>
+				   <td></td>
 				    <td> <div class="ImgC"><img th:src="@{${artista.photosImagePath}}" onerror="this.style.display='none'"></div>
 				   </td>
 				   </tr>
