@@ -56,6 +56,7 @@ public class CuratoreController {
     		Collections.sort(curatori);
     		Curatore curatoreDaRim = curatoreService.curatorePerId(curatoreID);
     		this.curatoreService.delete(curatoreDaRim);
+    		model.addAttribute("curatori",this.curatoreService.tutti());
     		return "curatori.html";
     }
 

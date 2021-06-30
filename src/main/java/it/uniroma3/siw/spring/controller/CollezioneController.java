@@ -161,7 +161,7 @@ public class CollezioneController {
     	for(int i=2;i<li.size();i=i+3) {
     	lista2.add(li.get(i));
     	}*/
-    	Map<Artista,Integer>mappa=new HashMap<>();
+    	Map<Artista,Integer> mappa=new HashMap<>();
     	for(Opera o:opere) {
     		if(!mappa.containsKey(o.getAutore())) {
     			mappa.put(o.getAutore(), 1);

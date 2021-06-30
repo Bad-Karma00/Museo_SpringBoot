@@ -3,13 +3,18 @@ package it.uniroma3.siw.spring.controller;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
@@ -18,6 +23,7 @@ import org.slf4j.Logger;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -54,8 +60,15 @@ public class ArtistaController {
     }
 
     @RequestMapping(value = "/artista/{id}", method = RequestMethod.GET)
-    public String getArtista(@PathVariable("id") Long id, Model model) {
-    	model.addAttribute("artista", this.artistaService.artistaPerId(id));
+    public String getArtista(@PathVariable("id") Long id, Model model) throws ParseException {
+    	DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataNascita = this.artistaService.artistaPerId(id).getDataNascita().format(formatters);
+        if(!(this.artistaService.artistaPerId(id).getDataMorte()==null)) {
+        String dataMorte = this.artistaService.artistaPerId(id).getDataMorte().format(formatters);
+        model.addAttribute("dataM",dataMorte);
+        }
+        model.addAttribute("artista", this.artistaService.artistaPerId(id));
+    	model.addAttribute("dataN",dataNascita);
     	return "artista.html";
     }
 
@@ -77,35 +90,41 @@ public class ArtistaController {
     public String modificaArtista(@ModelAttribute("artistaSelezionato") Long artistaID,
     								 @ModelAttribute("nome") String nomeNuovo,
     								 @ModelAttribute("cognome") String cognomeNuovo,
-    								 @ModelAttribute("dataNascita") LocalDate dataNascita,
+    								 @ModelAttribute("biografia") String biografia,
+    								 @ModelAttribute("dataNascita") String dataNascita,
     								 @ModelAttribute("luogoNascita") String luogoNascita,
-    								 @ModelAttribute("dataMorte") LocalDate dataMorte,
+    								 @ModelAttribute("dataMorte") String dataMorte,
     								 @ModelAttribute("luogoMorte") String luogoMorte,
     								 @ModelAttribute("nazionalita") String nazionalita,
     								 @RequestParam(value="img", required=false) MultipartFile immagine,
-    								 Model model, BindingResult bindingResult) throws IOException{
+    								 Model model, BindingResult bindingResult) throws IOException {
     	    
     		Artista artistaDaRim = artistaService.artistaPerId(artistaID);
 	     	String uploadDir1 ="photos/"+ artistaDaRim.getId()+artistaDaRim.getNome()+artistaDaRim.getCognome();
 		    Path uploadPath1 = Paths.get(uploadDir1);
 		    FileUtils.deleteDirectory(uploadPath1.toFile());;
-        	
-        	
-        	String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
+        		String fileName = StringUtils.cleanPath(immagine.getOriginalFilename());
         	Artista artistaNuovo = new Artista();
         	
         	artistaNuovo.setId(artistaID);
         	artistaNuovo.setNome(nomeNuovo);
         	artistaNuovo.setCognome(cognomeNuovo);
-        	artistaNuovo.setDataNascita(dataNascita);
+        	artistaNuovo.setBiografia(biografia);
+        	artistaNuovo.setDataNascita(LocalDate.parse(dataNascita));
         	artistaNuovo.setLuogoNascita(luogoNascita);
-        	artistaNuovo.setDataMorte(dataMorte);
+        	if(!(dataMorte==null)) {
+        	artistaNuovo.setDataMorte(LocalDate.parse(dataMorte));
+        	}
+        	else {
+        		artistaNuovo.setDataMorte(null);
+        	}
         	artistaNuovo.setLuogoMorte(luogoMorte);
         	artistaNuovo.setNazionalita(nazionalita);        	
             artistaNuovo.setImmagine(immagine.getOriginalFilename());
         	
         	artistaService.inserisci(artistaNuovo);
             model.addAttribute("artisti", this.artistaService.tutti());
+            if(!(immagine.getSize()==0)) {
             String uploadDir ="photos/"+ artistaNuovo.getId()+artistaNuovo.getNome()+artistaNuovo.getCognome();
             
             Path uploadPath = Paths.get(uploadDir);
@@ -119,7 +138,8 @@ public class ArtistaController {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ioe) {        
                 throw new IOException("Could not save image file: " + fileName, ioe);
-            }      
+            }    
+            }
             return "artisti.html";
     }
     
@@ -136,7 +156,7 @@ public class ArtistaController {
             String uploadDir ="photos/"+ artista.getId()+artista.getNome()+artista.getCognome();
             
             Path uploadPath = Paths.get(uploadDir);
-            
+            if(!(immagine.getSize()==0)) {
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -146,7 +166,8 @@ public class ArtistaController {
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ioe) {        
                 throw new IOException("Salvataggio non riuscito: " + fileName, ioe);
-            }  
+            } 
+            }
             return "artisti.html";
         }
         return "InserisciArtista.html";

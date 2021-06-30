@@ -37,7 +37,7 @@
     			<option value="0">Seleziona un artista</option>
     			<option th:each="artista : ${artisti}"
     					th:value="${artista.id}" 
-    					th:text="${artista.cognome}">
+    					th:text="|${artista.nome} ${artista.cognome}|">
     			</option>
 				</select>
 				</div>
