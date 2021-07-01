@@ -37,6 +37,7 @@ public class MainController {
 	
 	@RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
 	public String index(Model model) {
+
 		List<Long> nOpere = operaRepository.contaOpere(PageRequest.of(0,4));
 		logger.debug("Id estratti :" + nOpere);
 			

@@ -23,4 +23,5 @@ public interface OperaRepository extends CrudRepository<Opera, Long> {
 			+ " FROM Opera o"
 			+ " ORDER BY RAND()")
 		List<Long> contaOpere(PageRequest pageRequest);
+
 }
