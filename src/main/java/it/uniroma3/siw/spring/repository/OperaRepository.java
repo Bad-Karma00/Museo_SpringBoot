@@ -18,7 +18,8 @@ public interface OperaRepository extends CrudRepository<Opera, Long> {
 
 	public List<Opera> findByTitoloOrAutore(String titolo, Artista autore);
 
-	@Query("SELECT COUNT(p.id)"
-			 + " FROM  Opera p")
-		int contaOpere();
+	@Query("SELECT o.id"
+			+ " FROM Opera o"
+			+ " ORDER BY RAND()")
+		List<Long> contaOpere();
 }

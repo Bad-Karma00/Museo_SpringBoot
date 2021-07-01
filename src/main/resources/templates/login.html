@@ -12,10 +12,10 @@
             <fieldset>
                 <legend>LOGIN</legend>
                 <span th:if="${param.error}" class="alert alert-error">    
-                    Invalid username and password.
+                Username o password invalida
                 </span>
                 <span th:if="${param.logout}" class="alert alert-success"> 
-                    You have been logged out.
+                    Sei stato disconnesso
                 </span>
                 <span for="username">Username</span>
                 <input type="text" id="username" name="username"/>        
