@@ -11,7 +11,7 @@
   
   <div class="parallax">
 				<div class ="card">
-				<img th:src="@{${opera.photosImagePath}}" class="center">
+				<img th:src="@{${opera.photosImagePath}}" class="center" onerror="this.style.display='none'">
 						<div class="container">
 							Titolo:<span th:text="${opera.titolo}">qui-va-titolo</span>
 							<br>
