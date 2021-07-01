@@ -1,9 +1,11 @@
 package it.uniroma3.siw.spring.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,27 +37,16 @@ public class MainController {
 	
 	@RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
 	public String index(Model model) {
+		List<Long> nOpere = operaRepository.contaOpere(PageRequest.of(0,4));
+		logger.debug("Id estratti :" + nOpere);
 			
-			int nOpere = operaRepository.contaOpere();
-			logger.debug("Opere contate: " + nOpere);
+			model.addAttribute("opera1", operaService.operaPerId(nOpere.get(0)));
 			
+			model.addAttribute("opera2", operaService.operaPerId(nOpere.get(1)));
 			
-			Long randID1 = 1 + (long) (Math.random() * (nOpere - 0));
-			logger.debug("Primo ID random: " + randID1);
-			Long randID2 = 1 + (long) (Math.random() * (nOpere - 0));
-			logger.debug("Secondo ID random: " + randID2);
-			Long randID3 = 1 + (long) (Math.random() * (nOpere - 0));
-			logger.debug("Terzo ID random: " + randID3);
-			Long randID4 = 1 + (long) (Math.random() * (nOpere - 0));
-			logger.debug("Quarto ID random: " + randID4);
+			model.addAttribute("opera3", operaService.operaPerId(nOpere.get(2)));
 			
-			model.addAttribute("opera1", operaService.operaPerId(randID1));
-			
-			model.addAttribute("opera2", operaService.operaPerId(randID2));
-			
-			model.addAttribute("opera3", operaService.operaPerId(randID3));
-			
-			model.addAttribute("opera4", operaService.operaPerId(randID4));
+			model.addAttribute("opera4", operaService.operaPerId(nOpere.get(3)));
 			
 			return "index";
 	}
