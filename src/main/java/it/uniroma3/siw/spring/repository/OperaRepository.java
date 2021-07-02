@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -21,5 +22,6 @@ public interface OperaRepository extends CrudRepository<Opera, Long> {
 	@Query("SELECT o.id"
 			+ " FROM Opera o"
 			+ " ORDER BY RAND()")
-		List<Long> contaOpere();
+		List<Long> contaOpere(PageRequest pageRequest);
+
 }
