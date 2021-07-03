@@ -60,7 +60,7 @@ public class CuratoreService {
 	public void delete(Curatore curatore){
 		List<Collezione> collezioni = curatore.getCollezioni();
 		for(Collezione collezione : collezioni) {
-			collezioneService.delete(collezione);
+			collezione.setCuratore(null);
 		}
 		this.curatoreRepository.delete(curatore);
 	}
