@@ -58,7 +58,7 @@ public class CuratoreService {
 	
 	@Transactional
 	public void delete(Curatore curatore){
-		List<Collezione> collezioni = collezioneService.tutti();
+		List<Collezione> collezioni = curatore.getCollezioni();
 		for(Collezione collezione : collezioni) {
 			collezioneService.delete(collezione);
 		}
